@@ -2,12 +2,11 @@ package clases;
 
 public class Clase {
 
+	//test
 	private String horario;
 	private Profesor profesor;
 	private TipoClase tipo;
 	private String dia;
-	
-	
 	
 	public Clase(String horario, Profesor profesor, TipoClase tipo, String dia) {
 		super();
