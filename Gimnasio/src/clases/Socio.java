@@ -8,7 +8,7 @@ public class Socio {
 	private String telefono;
 	private String mail;
 	private Abono abono; //Se pone el abono acá o esto irá en la inscripción?
-	private Inscripcion inscripcion;
+	private Inscripcion inscripcion; //Es necesaria la inscripción como clase cuando en realidad es un validador?
 	private Certificado certificado;
 	
 	

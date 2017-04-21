@@ -1,18 +1,28 @@
 package clases;
 
+import java.util.ArrayList;
+
 public abstract class Deporte {
 
 	private Integer codigo;
 	private String titulo;
 	private String descripcion;
+	private ArrayList<Clase> clases;
 	
 
 	
 	public Deporte(Integer codigo, String titulo, String descripcion) {
-		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
+	}
+	
+	public ArrayList<Clase> getClases() {
+		return clases;
+	}
+
+	public void setClases(ArrayList<Clase> clases) {
+		this.clases = clases;
 	}
 	
 	public Integer getCodigo() {

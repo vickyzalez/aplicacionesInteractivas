@@ -1,21 +1,24 @@
-package clases;
+/*package clases;
+
+import java.util.ArrayList;
 
 public class DeporteConProfesor extends Deporte{
 
-	private Profesor profesor;
+	private ArrayList<Clase> clases;
 	
-	public DeporteConProfesor(Integer codigo, String titulo, String descripcion, Profesor profesor) {
+	public DeporteConProfesor(Integer codigo, String titulo, String descripcion) {
 		super(codigo, titulo, descripcion);
 		
 	}
-
-	public Profesor getProfesor() {
-		return profesor;
+	
+	public ArrayList<Clase> getClases() {
+		return clases;
 	}
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
+	public void setClases(ArrayList<Clase> clases) {
+		this.clases = clases;
 	}
 	
 
 }
+*/

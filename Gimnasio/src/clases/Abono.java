@@ -8,7 +8,7 @@ public class Abono {
 	private Integer codigo;
 	private String nombre;
 	private Float precio;
-	private Calendar vigencia;
+	private Calendar vigencia; //Se tiene en cuenta que ésta es la fecha de vencimiento
 
 	
 		

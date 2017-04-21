@@ -2,43 +2,52 @@ package clases;
 
 public class Clase {
 
-	//test
-	private String horario;
-	private Profesor profesor;
-	private TipoClase tipo;
 	private String dia;
+	private Integer horaInicio;
+	private Integer horaFin;
+	private Profesor profesor;
+	private Deporte deporte; //ver cómo ponerlo
 	
-	public Clase(String horario, Profesor profesor, TipoClase tipo, String dia) {
+	public Clase(String dia, Integer horaInicio, Integer horaFin, Profesor profesor) {
 		super();
-		this.horario = horario;
-		this.profesor = profesor;
-		this.tipo = tipo;
 		this.dia = dia;
-	}
-	public String getHorario() {
-		return horario;
-	}
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
-	public Profesor getProfesor() {
-		return profesor;
-	}
-	public void setProfesor(Profesor profesor) {
+		this.horaFin = horaFin;
+		this.horaInicio = horaInicio;
 		this.profesor = profesor;
 	}
-	public TipoClase getTipo() {
-		return tipo;
-	}
-	public void setTipo(TipoClase tipo) {
-		this.tipo = tipo;
-	}
+
 	public String getDia() {
 		return dia;
 	}
+
 	public void setDia(String dia) {
 		this.dia = dia;
 	}
+
+	public Integer getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(Integer horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public Integer getHoraFin() {
+		return horaFin;
+	}
+
+	public void setHoraFin(Integer horaFin) {
+		this.horaFin = horaFin;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+	
 	
 	
 }
