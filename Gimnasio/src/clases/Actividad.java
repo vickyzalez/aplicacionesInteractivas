@@ -1,19 +1,16 @@
 package clases;
 
-public class Clase {
+public class Actividad {
 
 	private String dia;
 	private Integer horaInicio;
 	private Integer horaFin;
-	private Profesor profesor;
-	private Deporte deporte; //ver cómo ponerlo
 	
-	public Clase(String dia, Integer horaInicio, Integer horaFin, Profesor profesor) {
+	public Actividad(String dia, Integer horaInicio, Integer horaFin, Profesor profesor) {
 		super();
 		this.dia = dia;
 		this.horaFin = horaFin;
 		this.horaInicio = horaInicio;
-		this.profesor = profesor;
 	}
 
 	public String getDia() {
@@ -40,14 +37,6 @@ public class Clase {
 		this.horaFin = horaFin;
 	}
 
-	public Profesor getProfesor() {
-		return profesor;
-	}
-
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
-	}
-	
 	
 	
 }

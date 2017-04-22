@@ -7,7 +7,7 @@ public abstract class Deporte {
 	private Integer codigo;
 	private String titulo;
 	private String descripcion;
-	private ArrayList<Clase> clases;
+	private ArrayList<Actividad> actividades;
 	
 
 	
@@ -17,12 +17,12 @@ public abstract class Deporte {
 		this.descripcion = descripcion;
 	}
 	
-	public ArrayList<Clase> getClases() {
-		return clases;
+	public ArrayList<Actividad> getClases() {
+		return actividades;
 	}
 
-	public void setClases(ArrayList<Clase> clases) {
-		this.clases = clases;
+	public void setClases(ArrayList<Actividad> clases) {
+		this.actividades = clases;
 	}
 	
 	public Integer getCodigo() {

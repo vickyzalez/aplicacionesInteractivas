@@ -80,6 +80,9 @@ public class Administrador {
 		} return null;
 	}
 	
+	//hacer buscador de empresa
+	
+	//hacer buscador de días
 	
 /* SOCIO */	
 	

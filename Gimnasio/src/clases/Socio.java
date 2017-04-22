@@ -7,8 +7,7 @@ public class Socio {
 	private String domicilio;
 	private String telefono;
 	private String mail;
-	private Abono abono; //Se pone el abono acá o esto irá en la inscripción?
-	private Inscripcion inscripcion; //Es necesaria la inscripción como clase cuando en realidad es un validador?
+	private Inscripcion inscripcion; 
 	private Certificado certificado;
 	
 	
@@ -50,12 +49,6 @@ public class Socio {
 	}
 	public void setMail(String mail) {
 		this.mail = mail;
-	}
-	public Abono getAbono() {
-		return abono;
-	}
-	public void setAbono(Abono abono) {
-		this.abono = abono;
 	}
 	public Inscripcion getInscripcion() {
 		return inscripcion;
