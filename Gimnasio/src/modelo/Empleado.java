@@ -14,10 +14,11 @@ public class Empleado {
 	public Empleado(){
 		
 	}
-	public Empleado(String nombre, String domicilio, String mail, Integer dni,
-			PuestoEmpleado puesto, Float sueldo) {
+	public Empleado(int dni, String nombre,String apellido, String domicilio, String mail,
+			PuestoEmpleado puesto, float sueldo) {
 		super();
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.domicilio = domicilio;
 		this.mail = mail;
 		this.dni = dni;

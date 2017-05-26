@@ -18,8 +18,14 @@ public abstract class Inscripcion {
 
 	public void Inscripcion(){
 		this.fecha = "01.01.2000";
+		this.actividades = new ArrayList<Actividad>();
 	}
 
+	
+	public boolean agregarActividad(Actividad actividad){
+		return this.actividades.add(actividad);
+	}
+	
 	public String getFecha() {
 		return fecha;
 	}

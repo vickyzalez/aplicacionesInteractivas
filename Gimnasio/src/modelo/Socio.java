@@ -1,6 +1,6 @@
 package modelo;
 
-import modelo.AptoMedico;
+import java.util.ArrayList;
 
 public class Socio {
 	
@@ -8,25 +8,44 @@ public class Socio {
 	private String nombre;
 	private String apellido;
 	private String domicilio;
-	private int telefono;
+	private Integer telefono;
 	private String mail;
 	private AptoMedico am;
+	private Inscripcion inscripcion;
 	
 	
-	public Socio(int dni, String nombre, String apellido, String domicilio, int telefono, String mail) {
+	public Socio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.domicilio = domicilio;
 		this.telefono = telefono;
 		this.mail = mail;
 		this.am = new AptoMedico();
+	
 	}
-	public void AgregarAptoMedico(String fechaCertificado, String nombreProfesional, String observaciones){
+	
+	public void agregarAptoMedico(String fechaCertificado, String nombreProfesional, String observaciones){
 		this.am.setFechaCertificado(fechaCertificado);
 		this.am.setNombreProfesional(nombreProfesional);
 		this.am.setObservaciones(observaciones);
 	}
+	
+	public void definirInscripcion(Inscripcion inscripcion){
+		if (inscripcion instanceof InscripcionNormal){
+			this.inscripcion = new InscripcionNormal();
+			this.inscripcion = inscripcion;
+		} else {
+			if (inscripcion instanceof InscripcionCorporativa){
+				this.inscripcion = new InscripcionCorporativa();
+				this.inscripcion = inscripcion;
+			}
+		}
+	}
+	
+	//Getters & Setters 
+	
 	public Integer getDni() {
 		return this.dni;
 	}
@@ -45,10 +64,10 @@ public class Socio {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
-	public int getTelefono() {
+	public Integer getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(Integer telefono) {
 		this.telefono = telefono;
 	}
 	public String getMail() {
@@ -57,6 +76,31 @@ public class Socio {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	public AptoMedico getAm() {
+		return am;
+	}
+	public void setAm(AptoMedico am) {
+		this.am = am;
+	}
+	public void setDni(Integer dni) {
+		this.dni = dni;
+	}
+
+	public Inscripcion getInscripcion() {
+		return inscripcion;
+	}
+
+	public void setInscripcion(Inscripcion inscripcion) {
+		this.inscripcion = inscripcion;
+	}
+
+
 	
 
 
