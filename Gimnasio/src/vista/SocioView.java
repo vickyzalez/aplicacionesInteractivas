@@ -1,7 +1,8 @@
-package modelo;
+package vista;
 
 import java.util.Iterator;
 
+import modelo.AptoMedico;
 import controladores.*;
 
 public class SocioView {

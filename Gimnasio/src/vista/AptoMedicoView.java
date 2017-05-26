@@ -1,4 +1,4 @@
-package modelo;
+package vista;
 
 public class AptoMedicoView {
 	private String fechaCertificado;
