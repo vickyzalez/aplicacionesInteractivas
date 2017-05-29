@@ -1,68 +1,57 @@
 package modelo;
 
-public class Empleado {
 
-	protected Integer dni;
-	protected String nombre;
-	protected String apellido;
-	protected String domicilio;
-	protected String mail;
-	private PuestoEmpleado puesto;
-	private Float sueldo; //????
+public class EmpleadoAdminstrativo extends Empleado {
 	
 	
-	public Empleado(){
+	private float bruto;
+	private float desc;
+    
+    
+
+	public EmpleadoAdminstrativo(int dni, String nombre,String apellido, String domicilio, String mail,
+			                     PuestoEmpleado puesto,float bruto,float desc) {
+		super(dni, nombre, apellido, domicilio, mail, puesto, bruto);
+		// TODO Auto-generated constructor stub
+		this.bruto = bruto;
+		this.desc = desc;
+	
+	}
+	
+	
+	public float calcularSueldo(){
+		float neto;
+		float aux = ((this.bruto * this.desc)/100);
+		neto = (this.bruto - aux);
+		return neto;
 		
 	}
-	public Empleado(int dni, String nombre,String apellido, String domicilio, String mail,
-			PuestoEmpleado puesto, float sueldo) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.domicilio = domicilio;
-		this.mail = mail;
-		this.dni = dni;
-		this.puesto = puesto;
-		this.sueldo = sueldo;
+
+
+	public float getBruto() {
+		return bruto;
 	}
-	
-	public String getNombre() {
-		return nombre;
+
+
+	public void setBruto(float bruto) {
+		this.bruto = bruto;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+
+	public float getDesc() {
+		return desc;
 	}
-	public String getDomicilio() {
-		return domicilio;
+
+
+	public void setDesc(float desc) {
+		this.desc = desc;
 	}
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
-	}
-	public String getMail() {
-		return mail;
-	}
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-	public Integer getDni() {
-		return dni;
-	}
-	public void setDni(Integer dni) {
-		this.dni = dni;
-	}
-	public PuestoEmpleado getPuesto() {
-		return puesto;
-	}
-	public void setPuesto(PuestoEmpleado puesto) {
-		this.puesto = puesto;
-	}
-	public Float getSueldo() {
-		return sueldo;
-	}
-	public void setSueldo(Float sueldo) {
-		this.sueldo = sueldo;
-	}
-	
+
+
 	
 
+
+	
+	
+    
 }
