@@ -1,5 +1,9 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import persistencia.AdminPersistSocio;
 
 public class Socio {
 	
@@ -14,7 +18,6 @@ public class Socio {
 	
 	
 	public Socio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail) {
-		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -22,6 +25,8 @@ public class Socio {
 		this.telefono = telefono;
 		this.mail = mail;
 		this.am = new AptoMedico();
+		
+		AdminPersistSocio.getInstancia().insert(this);
 	
 	}
 	
@@ -29,6 +34,11 @@ public class Socio {
 		this.am.setFechaCertificado(fechaCertificado);
 		this.am.setNombreProfesional(nombreProfesional);
 		this.am.setObservaciones(observaciones);
+		Calendar fechaFin = Calendar.getInstance();
+		fechaFin.add(Calendar.MONTH, 12);
+		SimpleDateFormat formatter= new SimpleDateFormat("DD-MM-yyyy"); 
+		String currentDate = formatter.format(fechaFin);
+		this.am.setFechaFin(currentDate);
 	}
 	
 	//TODO ver cómo poner la inscripcion

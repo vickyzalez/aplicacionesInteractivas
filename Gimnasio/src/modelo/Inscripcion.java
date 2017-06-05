@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public abstract class Inscripcion {
+	protected Integer id;
 	protected Socio socio; 
 	protected ArrayList<Actividad> actividades;
 	protected Abono abono;
@@ -39,6 +40,14 @@ public abstract class Inscripcion {
 
 	public void setAbono(Abono abono) {
 		this.abono = abono;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
