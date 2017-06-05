@@ -1,28 +1,17 @@
 package modelo;
 
-import java.util.Calendar;
-
 public class AptoMedico {
 	private String fechaCertificado;
 	private String nombreProfesional;
 	private String observaciones;
-	private Calendar fechaFin; //una vez que se da de alta el apto médico, tiene una vigencia de un año
+	private String fechaFin; //una vez que se da de alta el apto médico, tiene una vigencia de un año
 	
 	public AptoMedico(){
-		this.fechaCertificado = null;
-		this.nombreProfesional = null;
-		this.observaciones = null;
-		this.fechaFin = Calendar.getInstance();
-		fechaFin.add(Calendar.MONTH, 12);
+		this.fechaCertificado = "";
+		this.nombreProfesional = "";
+		this.observaciones = "";
+		this.fechaFin = ""; 
 	}	
-	public AptoMedico(String fechaCertificado, String nombreProfesional, String observaciones) {
-		super();
-		this.fechaCertificado = fechaCertificado;
-		this.nombreProfesional = nombreProfesional;
-		this.observaciones = observaciones;
-		this.fechaFin = Calendar.getInstance();
-		fechaFin.add(Calendar.MONTH, 12);
-	}
 
 	public String getFechaCertificado() {
 		return fechaCertificado;
@@ -46,6 +35,12 @@ public class AptoMedico {
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+	public String getFechaFin() {
+		return fechaFin;
+	}
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 	
 }
