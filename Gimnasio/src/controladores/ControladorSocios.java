@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import modelo.Actividad;
 import modelo.Inscripcion;
 import modelo.Socio;
+import persistencia.AdminPersistSocio;
 
 public class ControladorSocios {
 	private static ControladorSocios instancia;
@@ -48,7 +49,7 @@ public class ControladorSocios {
 	}
 	
 	public void modificarSocio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail){
-		Socio socio = buscarSocio(dni);
+		Socio socio = AdminPersistSocio.getInstancia().buscarSocio(dni);
 		if (socio == null) {
 			System.out.println("El socio no se encuentra registrado en el sistema");
 		} else {
