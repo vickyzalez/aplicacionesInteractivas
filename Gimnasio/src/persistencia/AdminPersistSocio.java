@@ -1,7 +1,9 @@
 package persistencia;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Vector;
 
 import modelo.Socio;
@@ -28,7 +30,7 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 	{
 		try
 		{			
-			connect();
+			Connection con = ConectorPersist.getInstance().getConnection();
 			Socio soc = null;
 			PreparedStatement s = con.prepareStatement("select * from TPAI.dbo.Socios where dni = ?");
 			s.setInt(1,dni);
@@ -44,12 +46,14 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 				String fechaCertificado = result.getString(7);
 				String nombreProfesional = result.getString(8);
 				String observaciones = result.getString(9);
+				Integer codigoIns = result.getInt(10);
 				
 				soc = new Socio(deenei, nombre, apellido, domicilio, telefono, mail);
 				soc.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);
-						
+				soc.inscribirSocio(codigoIns);
 			}
 			
+			con.close();		
 			return soc;
 			
 		}
@@ -64,10 +68,9 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 	public void insert(Object o) {
 		try
 		{
-			connect();
+			Connection con = ConectorPersist.getInstance().getConnection();
 			Socio soc = (Socio)o;
-			PreparedStatement s = con.prepareStatement("insert into Socios values (?,?,?,?,?,?,?,?,?,?)");
-			//agregar campos
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Socios values (?,?,?,?,?,?,?,?,?,?)");
 			s.setInt(1, soc.getDni());
 			s.setString(2, soc.getNombre());
 			s.setString(3,soc.getApellido());
@@ -79,6 +82,7 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 			s.setString(9,soc.getAm().getObservaciones());
 			s.setString(10, soc.getAm().getFechaFin());
 			s.execute();
+			con.close();
 		}
 		catch (Exception e)
 		{
@@ -92,7 +96,7 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 	public void update(Object o) {
 		try
 		{
-			connect();
+			Connection con = ConectorPersist.getInstance().getConnection();
 			Socio soc = (Socio)o;
 			PreparedStatement s = con.prepareStatement("update Socios " +
 					"set nombre = ?," +
@@ -105,7 +109,6 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 					"set aptoObs =?," +
 					"set aptoFin =?" +
 					"where dni =?");
-			//agregar campos
 			s.setString(1, soc.getNombre());
 			s.setString(2,soc.getApellido());
 			s.setString(3, soc.getDomicilio());
@@ -117,10 +120,11 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 			s.setString(9, soc.getAm().getFechaFin());
 			s.setInt(10, soc.getDni());
 			s.execute();
+			con.close();
 		}
 		catch (Exception e)
 		{
-			System.out.println();
+			System.out.println("No se pudo actualizar al socio");
 		}
 		
 	}
@@ -129,11 +133,12 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 	public void delete(Object d) {
 		try
 		{
-			connect();
+			Connection con = ConectorPersist.getInstance().getConnection();
 			Socio soc = (Socio)d;
-			PreparedStatement s = con.prepareStatement("delete from Socios where codigo = ?");
+			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Socios where dni = ?");
 			s.setInt(1, soc.getDni());
 			s.execute();
+			con.close();
 		}
 		catch (Exception e)
 		{
@@ -143,12 +148,47 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 
 		
 	}
-
-	@Override
-	public Vector<Object> select(Object o) {
-		// TODO Auto-generated method stub
+	
+	public Vector<Socio> selectAll()
+	{
+		try
+		{
+			
+	
+			Vector <Socio>rta = new Vector<Socio>();
+			Connection con = ConectorPersist.getInstance().getConnection();
+			Statement s = con.createStatement();
+			String senten = "Select * from TPAI.dbo.Socios";
+			ResultSet result = s.executeQuery(senten);
+			while (result.next())
+			{
+				Integer deenei = result.getInt(1);
+				String nombre = result.getString(2);
+				String apellido = result.getString(3);
+				String domicilio = result.getString(4);
+				Integer telefono = result.getInt(5);
+				String mail = result.getString(6);
+				String fechaCertificado = result.getString(7);
+				String nombreProfesional = result.getString(8);
+				String observaciones = result.getString(9);
+				
+				Socio soc = new Socio(deenei, nombre, apellido, domicilio, telefono, mail);
+				soc.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);
+				rta.add(soc);
+				
+			}
+			con.close();
+			return rta;
+		}
+		catch(Exception e)
+		{
+			System.out.println("No se pudo mostrar los socios");
+		}
 		return null;
 	}
+
+	
+	
 
 
 }

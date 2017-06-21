@@ -8,14 +8,6 @@ public abstract class Contratado {
 	protected String domicilio;
 	protected String mail;
 	
-
-	public Contratado(Integer dni, String nombre,String apellido, String domicilio, String mail) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.domicilio = domicilio;
-		this.mail = mail;
-		this.dni = dni;
-	}
 	
 	public abstract Float calcularSueldo();
 	

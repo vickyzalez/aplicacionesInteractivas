@@ -1,7 +1,6 @@
 package modelo;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
 public class Abono {
 
@@ -9,12 +8,11 @@ public class Abono {
 	private Integer codigo;
 	private String nombre;
 	private Float precio;
-	private Calendar vigencia; //Se tiene en cuenta que ésta es la fecha de vencimiento
+	private Date vigencia; 
 
 	
 		
-	public Abono(Integer codigo, String nombre, Float precio, Calendar vigencia) {
-		super();
+	public Abono(Integer codigo, String nombre, Float precio, Date vigencia) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
@@ -39,10 +37,10 @@ public class Abono {
 	public void setPrecio(Float precio) {
 		this.precio = precio;
 	}
-	public Calendar getVigencia() {
+	public Date getVigencia() {
 		return vigencia;
 	}
-	public void setVigencia(Calendar vigencia) {
+	public void setVigencia(Date vigencia) {
 		this.vigencia = vigencia;
 	}
 

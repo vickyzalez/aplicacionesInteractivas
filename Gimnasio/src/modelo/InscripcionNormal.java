@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 public class InscripcionNormal extends Inscripcion {
 
-	public InscripcionNormal(){
-		super();
-	}
 	
-	public void InscripcionCorporativa(Socio socio, Abono abono){
+	public InscripcionNormal(Integer cod, Integer dni, Integer codAbono){
 		super.actividades = new ArrayList<Actividad>();
-		super.abono = abono;
-		super.socio = socio;
+		super.codigo = cod;
+		super.dniSocio = dni;
+		super.codigoAbono = codAbono;
+		
 	}
 }

@@ -3,8 +3,6 @@ package modelo;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import persistencia.AdminPersistSocio;
-
 public class Socio {
 	
 	private Integer dni;
@@ -14,7 +12,7 @@ public class Socio {
 	private Integer telefono;
 	private String mail;
 	private AptoMedico am;
-	private Inscripcion inscripcion;
+	private Integer codigoIns;
 	
 	
 	public Socio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail) {
@@ -26,7 +24,6 @@ public class Socio {
 		this.mail = mail;
 		this.am = new AptoMedico();
 		
-		AdminPersistSocio.getInstancia().insert(this);
 	
 	}
 	
@@ -39,20 +36,14 @@ public class Socio {
 		SimpleDateFormat formatter= new SimpleDateFormat("DD-MM-yyyy"); 
 		String currentDate = formatter.format(fechaFin);
 		this.am.setFechaFin(currentDate);
+		
+	}
+
+	public void inscribirSocio(Integer codigoInscripcion){
+		this.codigoIns = codigoInscripcion;
+
 	}
 	
-	//TODO ver cómo poner la inscripcion
-	public void definirInscripcion(Inscripcion inscripcion){
-		if (inscripcion instanceof InscripcionNormal){
-			this.inscripcion = new InscripcionNormal();
-			this.inscripcion = inscripcion;
-		} else {
-			if (inscripcion instanceof InscripcionCorporativa){
-				this.inscripcion = new InscripcionCorporativa();
-				this.inscripcion = inscripcion;
-			}
-		}
-	}
 	
 	//Getters & Setters 
 	
@@ -102,16 +93,9 @@ public class Socio {
 		this.dni = dni;
 	}
 
-	public Inscripcion getInscripcion() {
-		return inscripcion;
-	}
-
-	public void setInscripcion(Inscripcion inscripcion) {
-		this.inscripcion = inscripcion;
-	}
-
-
-	
+	public Integer getInscripcion() {
+		return codigoIns;
+	}	
 
 
 }

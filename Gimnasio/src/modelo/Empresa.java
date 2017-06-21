@@ -1,32 +1,20 @@
 package modelo;
 
-import java.util.ArrayList;
-
-//Esta clase servirá para cuando tengamos las empresas para la inscripción corporativa
-
 public class Empresa {
 	
-	private Integer id;
+	private Integer codigo;
 	private String nombre;
-	private ArrayList<Socio> socios;
 
-	public Empresa(String nombre){
+	public Empresa(Integer codigo, String nombre){
+		this.codigo = codigo;
 		this.nombre = nombre;
 	}
 	
-	public boolean agregarSocio(Socio socio){
-		return this.socios.add(socio);				
+	public Integer getCodigo() {
+		return codigo;
 	}
-	
-	public boolean eliminarSocio(Socio socio){
-		return this.socios.remove(socio);
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 	public String getNombre() {
 		return nombre;
@@ -35,14 +23,6 @@ public class Empresa {
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Socio> getSocios() {
-		return socios;
-	}
-
-	public void setSocios(ArrayList<Socio> socios) {
-		this.socios = socios;
-	}
-	
 	
 
 }

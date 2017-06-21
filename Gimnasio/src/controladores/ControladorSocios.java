@@ -1,19 +1,24 @@
 package controladores;
 
-import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Vector;
 
-import modelo.Actividad;
 import modelo.Inscripcion;
+import modelo.InscripcionCorporativa;
+import modelo.InscripcionNormal;
 import modelo.Socio;
+import persistencia.AdminPersistInscrip;
 import persistencia.AdminPersistSocio;
 
 public class ControladorSocios {
 	private static ControladorSocios instancia;
-	private ArrayList<Socio> socios;
+	private Vector<Socio> socios;
+	private Vector<Inscripcion> inscripciones;
 
 
 	public ControladorSocios(){
-		this.socios = new ArrayList<Socio>(0);
+		this.socios = AdminPersistSocio.getInstancia().selectAll();
+		this.inscripciones = AdminPersistInscrip.getInstancia().selectAll();
 	}
 
 	// Singleton
@@ -24,26 +29,12 @@ public class ControladorSocios {
 		return instancia;
 	}
 	
-	public boolean agregarSocio(Socio s){
-		return this.socios.add(s);
-	}
 	
-	public boolean eliminarSocio(Socio s){
-	return this.socios.remove(s);
-	}
-	
-	public Socio buscarSocio(Integer id){
-		for (Socio socio : this.socios) {
-			if (socio.getDni() == id) {
-				return socio;
-			}
-		} return null;
-	}
-	
-	//Primero, se dar√° de alta al socio
+	//Primero, se da de alta al socio
 	public Socio altaSocio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail){
 		Socio socio = new Socio(dni, nombre, apellido, domicilio, telefono, mail);
-		agregarSocio(socio);
+		
+		AdminPersistSocio.getInstancia().insert(socio);
 		return socio;
 	
 	}
@@ -58,54 +49,77 @@ public class ControladorSocios {
 			socio.setNombre(nombre);
 			socio.setApellido(apellido);
 			socio.setTelefono(telefono);
+			
+			AdminPersistSocio.getInstancia().update(socio);
 			System.out.println("El socio con credencial: "+ dni + " ha sido modificado");
 		}
 		
 	}
 	
-	public void bajaSocio(Integer dniSocio){
-		Socio socio = buscarSocio(dniSocio);
+	public void bajaSocio(Integer dni){
+		Socio socio = AdminPersistSocio.getInstancia().buscarSocio(dni);
 		if (socio == null) {
 			System.out.println("El socio no se encuentra registrado en el sistema");
 		} else {
-			eliminarSocio(socio);
-			System.out.println("El socio "+ dniSocio + " ha sido eliminado");
+			AdminPersistSocio.getInstancia().delete(socio);
+			System.out.println("El socio "+ dni + " ha sido eliminado");
 		}
 	}
 
 	// Se puede presentar el apto m√©dico del socio en cualquier momento
 	public void presentarAptoMedico(Integer dniSocio, String fechaCertificado, String nombreProfesional, String observaciones){
-		Socio socio = buscarSocio(dniSocio);
+		Socio socio = AdminPersistSocio.getInstancia().buscarSocio(dniSocio);
 		if (socio == null) {
 			System.out.println("El socio no se encuentra registrado en el sistema");
 		} else {
 			socio.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);
+			AdminPersistSocio.getInstancia().update(socio);
 			System.out.println("El apto medico del socio con credencial: "+ dniSocio + " ha sido actualizado");
 		}
 	}
+
+
+	//Segundo, se elige el tipo de inscripciÛn que va a tener	
+	//NOTA: en el front tendr· un checkbox que te permitir· hacer visible el campo que desplegar· todas las empresas
+	public void generarInscripciÛnCorporativa(Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
+		
+		Integer codigo = this.inscripciones.size() + 1 ; //da la cantidad de inscripciones para generar el codigo
+		InscripcionCorporativa insc = new InscripcionCorporativa(codigo, dniSocio, codAbono, codEmpresa, fecha);
+		inscribirSocio(dniSocio, codigo);
+		AdminPersistInscrip.getInstancia().insert(insc);
+		
+	}
 	
-	//TODO ver la inscripcion
-	//Segundo, se eligir√° el tipo de inscripci√≥n que va a tener
-	public void inscribirSocio(Integer dniSocio, Inscripcion inscripcion){
-		Socio socio = buscarSocio(dniSocio);
+	public void generarInscripciÛnNormal(Integer dniSocio, Integer codAbono){
+		Integer codigo = this.inscripciones.size() + 1 ; //da la cantidad de inscripciones para generar el codigo
+		InscripcionNormal insc = new InscripcionNormal(codigo, dniSocio, codAbono);
+		inscribirSocio(dniSocio, codigo);
+		AdminPersistInscrip.getInstancia().insert(insc);
+		
+	}
+	
+	private void inscribirSocio(Integer dniSocio, Integer inscripcion){
+		Socio socio = AdminPersistSocio.getInstancia().buscarSocio(dniSocio);
 		if (socio == null) {
 			System.out.println("El socio no se encuentra registrado en el sistema");
 		} else {
-			socio.setInscripcion(inscripcion);
+			socio.inscribirSocio(inscripcion);
+			AdminPersistSocio.getInstancia().update(socio);
 		}
 	}
 	
 	//Tercero, se anotar√° a todas las actividades que desee
-	public void inscribirAActividades(Integer dniSocio, ArrayList<Actividad> actividades){
-		Socio socio = buscarSocio(dniSocio);
-		if (socio == null) {
-			System.out.println("El socio no se encuentra registrado en el sistema");
-		} else {	
-		for (Actividad a: actividades){
-			socio.getInscripcion().agregarActividad(a);
-		}
-	}
-	}
+	//TODO iscribir actividades
+//	public void inscribirAActividades(Integer dniSocio, ArrayList<Actividad> actividades){
+//		Socio socio = buscarSocio(dniSocio);
+//		if (socio == null) {
+//			System.out.println("El socio no se encuentra registrado en el sistema");
+//		} else {	
+//		for (Actividad a: actividades){
+//			socio.getInscripcion().agregarActividad(a);
+//		}
+//	}
+//	}
 	
 	//TODO validar, es la fachada del socio
 }

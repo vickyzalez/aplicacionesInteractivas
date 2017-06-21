@@ -3,27 +3,19 @@ package modelo;
 import java.util.ArrayList;
 
 public abstract class Inscripcion {
-	protected Integer id;
-	protected Socio socio; 
+	protected Integer codigo;
+	protected Integer dniSocio; 
+	protected Integer codigoAbono;
 	protected ArrayList<Actividad> actividades;
-	protected Abono abono;
+	//TODO Falta ver actividades
 
-	//TODO armar el composite con la inscripcion corporativa
-//TODO ver este método
-	public boolean agregarActividad(Actividad actividad){
-		return this.actividades.add(actividad);
-	}
 	
-	public boolean eliminarActividad(Actividad actividad){
-		return this.actividades.remove(actividad);
-	}
-	
-	public Socio getSocio() {
-		return socio;
+	public Integer getDniSocio() {
+		return dniSocio;
 	}
 
-	public void setSocio(Socio socio) {
-		this.socio = socio;
+	public void setDniSocio(Integer dniSocio) {
+		this.dniSocio = dniSocio;
 	}
 
 	public ArrayList<Actividad> getActividades() {
@@ -34,20 +26,20 @@ public abstract class Inscripcion {
 		this.actividades = actividades;
 	}
 
-	public Abono getAbono() {
-		return abono;
+	public Integer getCodigoAbono() {
+		return codigoAbono;
 	}
 
-	public void setAbono(Abono abono) {
-		this.abono = abono;
+	public void setCodigoAbono(Integer abono) {
+		this.codigoAbono = abono;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 }

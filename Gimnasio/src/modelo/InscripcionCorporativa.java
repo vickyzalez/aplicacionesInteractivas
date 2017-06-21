@@ -1,34 +1,41 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 public class InscripcionCorporativa extends Inscripcion {
 	
-	private Empresa empresa;
+	private Integer codEmpresa;
+	private Date fecha;
 	
-	public InscripcionCorporativa(){
-		super();
-	}
-	
-	public InscripcionCorporativa(Empresa empresa){
-		super();
-		this.empresa = empresa;
-	}
 
-	public InscripcionCorporativa(Socio socio, Abono abono, Empresa empresa){
+	public InscripcionCorporativa(Integer codigo, Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
 		super.actividades = new ArrayList<Actividad>();
-		super.abono = abono;
-		super.socio = socio;
-		this.empresa = empresa;
+		super.codigo = codigo;
+		super.dniSocio = dniSocio;
+		super.codigoAbono = codAbono;
+		this.codEmpresa = codEmpresa;
+		this.fecha = fecha;
+		
 	}
 
 	
-	public Empresa getEmpresa() {
-		return empresa;
+	public Integer getCodEmpresa() {
+		return codEmpresa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setCodEmpresa(Integer empresa) {
+		this.codEmpresa = empresa;
+	}
+
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	} 
 	
 	

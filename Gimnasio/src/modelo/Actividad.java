@@ -2,20 +2,17 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Actividad {
+public abstract class Actividad {
 	private Integer idActividad;
-	private ArrayList<HorarioActividad> horarios;
+	private ArrayList<Clase> clases;
+
 	
-	public Actividad(){
-		this.horarios = new ArrayList<HorarioActividad>();
+	public boolean agregarHorario(Clase horario){
+		return this.clases.add(horario);
 	}
 	
-	public boolean agregarHorario(HorarioActividad horario){
-		return this.horarios.add(horario);
-	}
-	
-	public boolean eliminarHorario(HorarioActividad horario){
-		return this.horarios.remove(horario);
+	public boolean eliminarHorario(Clase horario){
+		return this.clases.remove(horario);
 	}
 
 	public Integer getIdActividad() {
@@ -26,12 +23,12 @@ public class Actividad {
 		this.idActividad = idActividad;
 	}
 
-	public ArrayList<HorarioActividad> getHorarios() {
-		return horarios;
+	public ArrayList<Clase> getClases() {
+		return clases;
 	}
 
-	public void setHorarios(ArrayList<HorarioActividad> horarios) {
-		this.horarios = horarios;
+	public void setHorarios(ArrayList<Clase> horarios) {
+		this.clases = horarios;
 	}
 	
 	

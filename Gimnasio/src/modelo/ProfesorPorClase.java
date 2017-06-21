@@ -5,8 +5,13 @@ public class ProfesorPorClase extends Profesor {
 	private Float valorPorHora;
 
 	public ProfesorPorClase(Integer dni, String nombre,String apellido, String domicilio, String mail, Float valor) {
-		super(dni, nombre, apellido, domicilio, mail);
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.domicilio = domicilio;
+		this.mail = mail;
+		this.dni = dni;
 		this.valorPorHora = valor;
+		//listado clases
 	}
 	
 	@Override
