@@ -3,6 +3,8 @@ package modelo;
 public class ProfesorPorClase extends Profesor {
 	
 	private Float valorPorHora;
+	private Float retencion;
+	private Float impuesto; //porcentaje = 21%
 
 	public ProfesorPorClase(Integer dni, String nombre,String apellido, String domicilio, String mail, Float valor) {
 		this.nombre = nombre;

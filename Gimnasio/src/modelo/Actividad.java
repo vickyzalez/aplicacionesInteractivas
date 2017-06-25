@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Actividad {
 	private Integer idActividad;
+	private String descripcion;
 	private ArrayList<Clase> clases;
 
 	

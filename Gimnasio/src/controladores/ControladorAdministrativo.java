@@ -18,7 +18,7 @@ public class ControladorAdministrativo {
 	private ArrayList<Contratado> contratados;
 	private Vector<Empresa> empresas;
 	private Vector<Abono> abonos;
-	private ArrayList<Profesor> profesores; //Ver si es necesario
+	private Vector<Profesor> profesores; //Ver si es necesario
 
 	
 
@@ -38,9 +38,47 @@ public class ControladorAdministrativo {
 		return instancia;
 	}
 
+	private Empresa buscarEmpresaBuffer (Integer codigo){
+			
+			for (Empresa empresa : empresas) {
+				if (empresa.getCodigo() == codigo) {
+					return empresa;
+				} else {
+					Empresa emp = AdminPersistEmpresa.getInstancia().buscarEmpresa(codigo);
+					if (emp == null){
+						return null;
+					} else {
+						empresas.addElement(emp);
+						return emp;
+					}
+				}
+				
+			}
+			return null;
+		}
+	
+	 Abono buscarAbonoBuffer (Integer codigo){
+		
+		for (Abono abono : abonos) {
+			if (abono.getCodigo() == codigo) {
+				return abono;
+			} else {
+				Abono ab = AdminPersistAbono.getInstancia().buscarAbono(codigo);
+				if (ab == null){
+					return null;
+				} else {
+					abonos.addElement(ab);
+					return ab;
+				}
+			}
+			
+		}
+		return null;
+	}
+	
 	public String obtenerDescripcionEmpresa(Integer codigo){
 		String emp = null;
-		Empresa empresa = AdminPersistEmpresa.getInstancia().buscarEmpresa(codigo);
+		Empresa empresa = buscarEmpresaBuffer(codigo);
 		if (empresa == null) {
 			System.out.println("La empresa no se encuentra dada de alta en el sistema");
 		} else {
@@ -54,16 +92,18 @@ public class ControladorAdministrativo {
 		Integer codigo = this.empresas.size() + 1 ; //da la cantidad de empresas para generar el codigo
 		Empresa emp = new Empresa(codigo, nombre);
 		AdminPersistEmpresa.getInstancia().insert(emp);
+		empresas.addElement(emp);
 		
 	}
 		
 	public void bajaEmpresa(Integer codigo){
-		Empresa empresa = AdminPersistEmpresa.getInstancia().buscarEmpresa(codigo);
+		Empresa empresa = buscarEmpresaBuffer(codigo);
 		if (empresa == null) {
 			System.out.println("La empresa no se encuentra dada de alta en el sistema");
 		} else {
 			AdminPersistEmpresa.getInstancia().delete(empresa);
 			System.out.println("La empresa "+ codigo + " ha sido eliminado");
+			empresas.removeElement(empresa);
 		}
 		
 	}

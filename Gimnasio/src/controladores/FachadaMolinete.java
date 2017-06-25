@@ -21,10 +21,10 @@ public class FachadaMolinete {
 
 		Calendar hoy = Calendar.getInstance();
 		Date today = (Date) hoy.getTime();
-		Socio socio = AdminPersistSocio.getInstancia().buscarSocio(dniSocio);
+		Socio socio = ControladorSocios.getInstancia().buscarSocioBuffer(dniSocio);
 		
-		Date fechaFinAptoMed = obtenerFechaFinAptoMed(socio);
-		Date fechaFinAbono = obtenerFinAbono(socio);
+		Date fechaFinAptoMed = ControladorSocios.getInstancia().obtenerFechaFinAptoMed(socio);
+		Date fechaFinAbono = ControladorSocios.getInstancia().obtenerFinAbono(socio);
 		
 		if (today.after(fechaFinAptoMed)){
 			return false;
@@ -46,31 +46,6 @@ public class FachadaMolinete {
 		}
 		
 		return false;	
-	}
-	
-	
-	
-	private Date obtenerFinAbono(Socio socio) {
-		
-		Inscripcion ins = AdminPersistInscrip.getInstancia().buscarInscrip(socio.getInscripcion());
-		Abono abono = AdminPersistAbono.getInstancia().buscarAbono(ins.getCodigoAbono());
-		
-		return abono.getVigencia();
-	}
-
-	private Date obtenerFechaFinAptoMed(Socio socio){
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("DD-MM-yyyy");    
-	    Date date;
-		try {
-			date = (Date) formatter.parse(socio.getAm().getFechaFin());
-		} catch (ParseException e) {
-			System.out.println("error de parseo");
-			return null;
-		}
-
-	    return date;
-	
-	}
+	}	
 	
 }
