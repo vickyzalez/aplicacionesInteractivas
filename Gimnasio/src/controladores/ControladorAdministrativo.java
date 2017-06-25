@@ -26,7 +26,7 @@ public class ControladorAdministrativo {
 		contratados = new ArrayList<Contratado>(0);
 		empresas = AdminPersistEmpresa.getInstancia().selectAll();
 		abonos = AdminPersistAbono.getInstancia().selectAll();
-		profesores = new ArrayList<Profesor>(0); //ver si es necesario
+		profesores = new Vector<Profesor>(0); //ver si es necesario
 		
 	}
 
