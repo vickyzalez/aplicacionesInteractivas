@@ -7,8 +7,9 @@ public class DiaSemana {
 	private Integer id;
 	private String dia;
 
-	public DiaSemana(String dia){
+	public DiaSemana(String dia, Integer id){
 		this.dia= dia;
+		this.id = id;
 	}
 	
 	public Integer getId() {

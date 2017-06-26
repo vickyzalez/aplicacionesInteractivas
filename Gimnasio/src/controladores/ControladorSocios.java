@@ -72,10 +72,19 @@ public class ControladorSocios {
 	
 	//Primero, se da de alta al socio
 	public Socio altaSocio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail){
-		Socio socio = new Socio(dni, nombre, apellido, domicilio, telefono, mail);
+		
+		Socio socio = buscarSocioBuffer(dni);
+		if (socio == null) {
+		
+		Socio soc = new Socio(dni, nombre, apellido, domicilio, telefono, mail);
 		
 		AdminPersistSocio.getInstancia().insert(socio);
 		this.socios.addElement(socio);
+		
+		return soc;
+		
+		} 
+		
 		return socio;
 	
 	}

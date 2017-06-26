@@ -19,29 +19,29 @@ public class Empleado extends Contratado {
 		this.impuesto = impuesto;
 	}
 	
-//	public Float getSueldo() {
-//		return sueldo;
-//	}
-//
-//	public void setSueldo(Float sueldo) {
-//		this.sueldo = sueldo;
-//	}
-//
-//	public Float getRetencion() {
-//		return retencion;
-//	}
-//
-//	public void setRetencion(Float retencion) {
-//		this.retencion = retencion;
-//	}
-//
-//	public Float getImpuesto() {
-//		return impuesto;
-//	}
-//
-//	public void setImpuesto(Float impuesto) {
-//		this.impuesto = impuesto;
-//	}
+	public Float getSueldo() {
+		return sueldo;
+	}
+
+	public void setSueldo(Float sueldo) {
+		this.sueldo = sueldo;
+	}
+
+	public Float getRetencion() {
+		return retencion;
+	}
+
+	public void setRetencion(Float retencion) {
+		this.retencion = retencion;
+	}
+
+	public Float getImpuesto() {
+		return impuesto;
+	}
+
+	public void setImpuesto(Float impuesto) {
+		this.impuesto = impuesto;
+	}
 
 	@Override
 	public Float calcularSueldo(){
