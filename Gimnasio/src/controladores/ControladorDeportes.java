@@ -1,19 +1,17 @@
 package controladores;
-import java.util.ArrayList;
+import java.util.Vector;
 
-import modelo.Actividad;
 import modelo.Cronograma;
 import modelo.Deporte;
-import modelo.Inscripcion;
-import modelo.Socio;
+import persistencia.AdminPersistDeporte;
 
 public class ControladorDeportes {
 	private static ControladorDeportes instancia;
 	private Cronograma cronograma;
-	private ArrayList<Deporte> deportes;
+	private Vector<Deporte> deportes;
 
 	public ControladorDeportes(){
-		deportes = new ArrayList<Deporte>(0);
+		deportes = AdminPersistDeporte.getInstancia().selectAll();
 	}
 
 	//Singleton
@@ -24,23 +22,40 @@ public class ControladorDeportes {
 		return instancia;
 	}
 
-	public boolean agregarDeporte (Deporte d){
-		return this.deportes.add(d);
-	}
-	public boolean eliminarDeporte(Deporte d){
-		return this.deportes.remove(d);
+	Deporte buscarDeporteBuffer (Integer codigo){
+		
+		for (Deporte deporte : deportes) {
+			if (deporte.getCodigo() == codigo) {
+				return deporte;
+			} else {
+				Deporte dep = AdminPersistDeporte.getInstancia().buscarDeporte(codigo);
+				if (dep == null){
+					return null;
+				} else {
+					deportes.addElement(dep);
+					return dep;
+				}
+			}
+			
+		}
+		return null;
 	}
 	
-	public Deporte altaDeporte(Integer codigo, String titulo, String descripcion){
+	
+	public void altaDeporte(Integer codigo, String titulo, String descripcion){
 		Deporte deporte = new Deporte(codigo, titulo, descripcion);
-		agregarDeporte(deporte);
-		return deporte;
+		
 		
 	}
 	
 	//TODO método
 		public void modificarDeporte(){
 			
+	}
+		
+	//TODO método
+	public void bajaDeporte(){
+		
 	}
 		
 	//TODO método

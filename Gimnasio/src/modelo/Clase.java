@@ -1,14 +1,16 @@
 package modelo;
 
 public class Clase {
+	private Integer idClase;
 	private Integer horaDesde;
 	private Integer horaHasta;
-	private String dia; //para no tener DíaSemana
+	private Integer dia; 
 
-	public Clase(Integer desde, Integer hasta, String dia){
+	public Clase(Integer idClase, Integer desde, Integer hasta, Integer idDia){
+		this.idClase = idClase;
 		this.horaDesde = desde;
 		this.horaHasta = hasta;
-		this.dia = dia;
+		this.dia = idDia;
 	}
 
 	public Integer getHoraDesde() {
@@ -27,12 +29,20 @@ public class Clase {
 		this.horaHasta = horaHasta;
 	}
 
-	public String getDia() {
+	public Integer getDia() {
 		return dia;
 	}
 
-	public void setDia(String dia) {
+	public void setDia(Integer dia) {
 		this.dia = dia;
+	}
+
+	public Integer getIdClase() {
+		return idClase;
+	}
+
+	public void setIdClase(Integer idClase) {
+		this.idClase = idClase;
 	}
 	
 

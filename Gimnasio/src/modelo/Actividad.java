@@ -1,36 +1,32 @@
 package modelo;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 public abstract class Actividad {
-	private Integer idActividad;
-	private String descripcion;
-	private ArrayList<Clase> clases;
-
+	protected Integer idActividad;
+	protected String descripcion;
+	protected Vector<Clase> clases;
 	
-	public boolean agregarHorario(Clase horario){
-		return this.clases.add(horario);
-	}
-	
-	public boolean eliminarHorario(Clase horario){
-		return this.clases.remove(horario);
-	}
-
 	public Integer getIdActividad() {
 		return idActividad;
 	}
-
 	public void setIdActividad(Integer idActividad) {
 		this.idActividad = idActividad;
 	}
-
-	public ArrayList<Clase> getClases() {
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public Vector<Clase> getClases() {
 		return clases;
 	}
-
-	public void setHorarios(ArrayList<Clase> horarios) {
-		this.clases = horarios;
+	public void setClases(Vector<Clase> clases) {
+		this.clases = clases;
 	}
+
+	
 	
 	
 }

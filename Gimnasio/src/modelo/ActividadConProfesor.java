@@ -1,21 +1,24 @@
 package modelo;
 
+import java.util.Vector;
 
 public class ActividadConProfesor extends Actividad{
 	
-	private Profesor profesor;
+	private Integer idProfe;
 
-	public ActividadConProfesor(Profesor profesor){
-		super();
-		this.profesor= profesor;
+	public ActividadConProfesor(Integer id, String desc, Integer profesor){
+		super.idActividad = id;
+		super.descripcion = desc;
+		this.idProfe= profesor;
+		super.clases = new Vector<Clase>();
 	}
 
-	public Profesor getProfesor() {
-		return profesor;
+	public Integer getProfesor() {
+		return idProfe;
 	}
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
+	public void setProfesor(Integer profesor) {
+		this.idProfe = profesor;
 	}
 
 	

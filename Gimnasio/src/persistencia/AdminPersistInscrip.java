@@ -70,11 +70,12 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Inscripcion inscripcion = (Inscripcion)o;
-			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Inscripciones values (?,?,?,?)");
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Inscripciones values (?,?,?,?,?)");
 			s.setInt(1, inscripcion.getCodigo());
 			s.setInt(2, inscripcion.getDniSocio());
 			s.setInt(3, inscripcion.getCodigoAbono());
 			
+			//TODO Ver, quizas se deberia cambiar
 			if (inscripcion instanceof InscripcionCorporativa){
 				s.setInt(4, ((InscripcionCorporativa) inscripcion).getCodEmpresa());
 				s.setDate(5, ((InscripcionCorporativa) inscripcion).getFecha());
