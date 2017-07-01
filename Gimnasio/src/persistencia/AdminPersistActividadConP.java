@@ -37,11 +37,12 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 			ResultSet result = s.executeQuery();
 			while (result.next())
 			{
-				Integer cod = result.getInt(1);
-				String desc = result.getString(2);
-				Integer codProfe = result.getInt(3);
+				Integer idDep = result.getInt(1);
+				Integer cod = result.getInt(2);
+				String desc = result.getString(3);
+				Integer codProfe = result.getInt(4);
 				
-				actividad = new ActividadConProfesor(cod, desc, codProfe);
+				actividad = new ActividadConProfesor(idDep, cod, desc, codProfe);
 				
 			}
 			
@@ -62,12 +63,15 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadConProfesor act = (ActividadConProfesor)o;
-			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Actividades values (?,?,?)");
-			s.setInt(1, act.getIdActividad());
-			s.setString(2, act.getDescripcion());
-			s.setInt(3, act.getProfesor());
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Actividades values (?,?,?,?)");
+			s.setInt(1, act.getIdDeporte());
+			s.setInt(2, act.getIdActividad());
+			s.setString(3, act.getDescripcion());
+			s.setInt(4, act.getProfesor());
 			s.execute();
 			con.close();
+
+			insertDepAct(act.getIdActividad(), act.getIdDeporte());
 		}
 		catch (Exception e)
 		{
@@ -77,6 +81,23 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 		
 	}
 
+	public void insertDepAct(Integer idAct, Integer idDep) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Deporte_Actividad values (?,?)");
+			s.setInt(1, idDep);
+			s.setInt(2, idAct);
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo insertar la actividad");
+		}	
+		
+	}
+	
 	@Override
 	public void update(Object o) {
 		try
@@ -84,12 +105,14 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadConProfesor act = (ActividadConProfesor)o;
 			PreparedStatement s = con.prepareStatement("update Actividades " +
+					"set idDep = ?," +
 					"set descripcion = ?," +
 					"set profesorCodigo =?," +
 					"where codigo =?");
-			s.setString(1, act.getDescripcion());
-			s.setInt(2,act.getProfesor());
-			s.setInt(3, act.getIdActividad());
+			s.setInt(1, act.getIdDeporte());
+			s.setString(2, act.getDescripcion());
+			s.setInt(3,act.getProfesor());
+			s.setInt(4, act.getIdActividad());
 			s.execute();
 			con.close();
 		}
@@ -104,8 +127,11 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 	public void delete(Object d) {
 		try
 		{
-			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadConProfesor act = (ActividadConProfesor)d;
+			
+			deleteDepAct(act.getIdActividad());
+			
+			Connection con = ConectorPersist.getInstance().getConnection();
 			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Actividades where codigo = ?");
 			s.setInt(1, act.getIdActividad());
 			s.execute();
@@ -120,6 +146,23 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 		
 	}
 	
+	public void deleteDepAct(Integer idAct) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Deporte_Actividad where codigoActividad = ?");
+			s.setInt(1, idAct);
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo eliminar a la actividad");
+		}
+		
+	}
+	
+	
 	public Vector<ActividadConProfesor> selectAll()
 	{
 		try
@@ -133,11 +176,12 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 			ResultSet result = s.executeQuery(senten);
 			while (result.next())
 			{
-				Integer codigo = result.getInt(1);
-				String descripcion = result.getString(2);
-				Integer codProfe = result.getInt(3);
+				Integer codDep = result.getInt(1);
+				Integer codigo = result.getInt(2);
+				String descripcion = result.getString(3);
+				Integer codProfe = result.getInt(4);
 				
-				ActividadConProfesor act = new ActividadConProfesor(codigo, descripcion, codProfe);
+				ActividadConProfesor act = new ActividadConProfesor(codDep, codigo, descripcion, codProfe);
 				
 				rta.add(act);
 				

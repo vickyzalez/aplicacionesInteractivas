@@ -7,7 +7,7 @@ public class ProfesorConSueldo extends Profesor{
 	private Float sueldo;
 	private Float retencion;
 	private Float impuesto; //porcentaje = 21%
-	private Vector<Clase> clases;
+	private Vector<ClaseAct> clases;
 	
 	public ProfesorConSueldo(Integer dni, String nombre,String apellido, String domicilio, String mail, 
 			Float sueldo, Float retencion, Float impuesto) {
@@ -19,11 +19,11 @@ public class ProfesorConSueldo extends Profesor{
 		this.sueldo = sueldo;
 		this.retencion = retencion;
 		this.impuesto = impuesto;
-		this.clases = new Vector<Clase>();
+		this.clases = new Vector<ClaseAct>();
 	}
 
 	
-	public void agregarClase(Clase clase){
+	public void agregarClase(ClaseAct clase){
 		this.clases.add(clase);
 	}
 	
@@ -67,12 +67,12 @@ public class ProfesorConSueldo extends Profesor{
 	}
 
 
-	public Vector<Clase> getClases() {
+	public Vector<ClaseAct> getClases() {
 		return clases;
 	}
 
 
-	public void setClases(Vector<Clase> clases) {
+	public void setClases(Vector<ClaseAct> clases) {
 		this.clases = clases;
 	}
 	

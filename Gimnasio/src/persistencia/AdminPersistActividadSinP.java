@@ -37,10 +37,11 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 			ResultSet result = s.executeQuery();
 			while (result.next())
 			{
-				Integer cod = result.getInt(1);
-				String desc = result.getString(2);
+				Integer idDep = result.getInt(1);
+				Integer cod = result.getInt(2);
+				String desc = result.getString(3);
 				
-				actividad = new ActividadSinProfesor(cod, desc);
+				actividad = new ActividadSinProfesor(idDep, cod, desc);
 				
 			}
 			
@@ -61,18 +62,39 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadSinProfesor act = (ActividadSinProfesor)o;
-			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Actividades values (?,?,?)");
-			s.setInt(1, act.getIdActividad());
-			s.setString(2, act.getDescripcion());
-			s.setInt(3, 0);
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Actividades values (?,?,?,?)");
+			s.setInt(1, act.getIdDeporte());
+			s.setInt(2, act.getIdActividad());
+			s.setString(3, act.getDescripcion());
+			s.setInt(4, 0);
 			s.execute();
 			con.close();
+			
+			insertDepAct(act.getIdActividad(), act.getIdDeporte());
+			
 		}
 		catch (Exception e)
 		{
 			System.out.println("No se pudo insertar la actividad");
 		}
 		
+		
+	}
+	
+	public void insertDepAct(Integer idAct, Integer idDep) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Deporte_Actividad values (?,?)");
+			s.setInt(1, idDep);
+			s.setInt(2, idAct);
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo insertar la actividad");
+		}	
 		
 	}
 
@@ -83,12 +105,14 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadSinProfesor act = (ActividadSinProfesor)o;
 			PreparedStatement s = con.prepareStatement("update Actividades " +
+					"set idDep = ?," +
 					"set descripcion = ?," +
 					"set codigoProfesor =?," +
 					"where codigo =?");
-			s.setString(1, act.getDescripcion());
-			s.setInt(2,0);
-			s.setInt(3, act.getIdActividad());
+			s.setInt(1, act.getIdDeporte());
+			s.setString(2, act.getDescripcion());
+			s.setInt(3,0);
+			s.setInt(4, act.getIdActividad());
 			s.execute();
 			con.close();
 		}
@@ -103,10 +127,32 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 	public void delete(Object d) {
 		try
 		{
-			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadSinProfesor act = (ActividadSinProfesor)d;
+			
+			deleteDepAct(act.getIdActividad());
+			
+			Connection con = ConectorPersist.getInstance().getConnection();
 			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Actividades where codigo = ?");
 			s.setInt(1, act.getIdActividad());
+			s.execute();
+			con.close();
+			
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo eliminar a la actividad");
+		}
+		
+	}
+	
+	
+	public void deleteDepAct(Integer idAct) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Deporte_Actividad where codigoActividad = ?");
+			s.setInt(1, idAct);
 			s.execute();
 			con.close();
 		}
@@ -114,8 +160,6 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 		{
 			System.out.println("No se pudo eliminar a la actividad");
 		}
-		
-
 		
 	}
 	
@@ -132,10 +176,11 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 			ResultSet result = s.executeQuery(senten);
 			while (result.next())
 			{
-				Integer codigo = result.getInt(1);
-				String descripcion = result.getString(2);
+				Integer idDep = result.getInt(1);
+				Integer codigo = result.getInt(2);
+				String descripcion = result.getString(3);
 				
-				ActividadSinProfesor act = new ActividadSinProfesor(codigo, descripcion);
+				ActividadSinProfesor act = new ActividadSinProfesor(idDep, codigo, descripcion);
 				
 				rta.add(act);
 				

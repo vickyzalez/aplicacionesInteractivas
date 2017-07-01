@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import modelo.Abono;
 import modelo.Actividad;
-import modelo.Clase;
+import modelo.ClaseAct;
 import modelo.Inscripcion;
 import modelo.Socio;
 import persistencia.AdminPersistAbono;
@@ -37,7 +37,7 @@ public class FachadaMolinete {
 		Vector<Actividad> actividades = null; //acá se le pondrá las actividades del socio que se sacarán de la inscrip
 		
 		for (Actividad actividad : actividades) {
-			for (Clase clase : actividad.getClases()) {
+			for (ClaseAct clase : actividad.getClases()) {
 				
 				if((today.getTime() > clase.getHoraDesde()) && (today.getTime() < clase.getHoraHasta())){
 					return true;

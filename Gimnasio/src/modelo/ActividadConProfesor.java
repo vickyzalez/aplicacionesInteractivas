@@ -6,14 +6,12 @@ public class ActividadConProfesor extends Actividad{
 	
 	private Integer idProfe;
 
-	public ActividadConProfesor(Integer id, String desc, Integer profesor){
+	public ActividadConProfesor(Integer idDep, Integer id, String desc, Integer profesor){
 		super.idActividad = id;
+		super.idDeporte = idDep;
 		super.descripcion = desc;
-		this.idProfe
-		
-		
-		= profesor;
-		super.clases = new Vector<Clase>();
+		this.idProfe= profesor;
+		super.clases = new Vector<ClaseAct>();
 	}
 
 	public Integer getProfesor() {
