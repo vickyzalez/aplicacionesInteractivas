@@ -18,16 +18,16 @@ public class ConectorPersist {
 	{
 		if (pool== null)
 			pool =new ConectorPersist();
-		return pool;
+		return pool;  
 	}
 	
 	private Connection connect()
 	{
 		try
 		{
-            String userName = "user";
-            String password = "pass";
-            String url = "jdbc:sqlserver://bd:1433";
+            String userName = "sa";
+            String password = "admin123";
+            String url = "jdbc:sqlserver://IDNOTES:1433";
             
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 

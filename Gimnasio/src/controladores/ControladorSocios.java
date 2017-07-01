@@ -31,6 +31,11 @@ public class ControladorSocios {
 		}
 		return instancia;
 	}
+
+	public Vector<Socio> getSocios() {
+		return socios;
+	}
+	
 	
 	Socio buscarSocioBuffer (Integer dni){
 		
@@ -78,8 +83,8 @@ public class ControladorSocios {
 		
 		Socio soc = new Socio(dni, nombre, apellido, domicilio, telefono, mail);
 		
-		AdminPersistSocio.getInstancia().insert(socio);
-		this.socios.addElement(socio);
+		AdminPersistSocio.getInstancia().insert(soc);
+		this.socios.addElement(soc);
 		
 		return soc;
 		
@@ -120,7 +125,7 @@ public class ControladorSocios {
 		}
 	}
 
-	// Se puede presentar el apto mÃ©dico del socio en cualquier momento
+	// Se puede presentar el apto medico del socio en cualquier momento
 	public void presentarAptoMedico(Integer dniSocio, String fechaCertificado, String nombreProfesional, String observaciones){
 		Socio socio = buscarSocioBuffer(dniSocio);
 		if (socio == null) {
@@ -138,8 +143,8 @@ public class ControladorSocios {
 
 
 	//Segundo, se elige el tipo de inscripción que va a tener	
-	//NOTA: en el front tendrá un checkbox que te permitirá hacer visible el campo que desplegará todas las empresas
-	public void generarInscripciónCorporativa(Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
+	//NOTA: en el front tendra un checkbox que te permitirá hacer visible el campo que desplegara todas las empresas
+	public void generarInscripcionCorporativa(Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
 		
 		Integer codigo = this.inscripciones.size() + 1 ; //da la cantidad de inscripciones para generar el codigo
 		InscripcionCorporativa insc = new InscripcionCorporativa(codigo, dniSocio, codAbono, codEmpresa, fecha);
@@ -149,7 +154,7 @@ public class ControladorSocios {
 		
 	}
 	
-	public void generarInscripciónNormal(Integer dniSocio, Integer codAbono){
+	public void generarInscripcionNormal(Integer dniSocio, Integer codAbono){
 		Integer codigo = this.inscripciones.size() + 1 ; //da la cantidad de inscripciones para generar el codigo
 		InscripcionNormal insc = new InscripcionNormal(codigo, dniSocio, codAbono);
 		inscribirSocio(dniSocio, codigo);

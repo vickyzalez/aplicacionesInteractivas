@@ -49,7 +49,8 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 				Integer codigoIns = result.getInt(10);
 				
 				soc = new Socio(deenei, nombre, apellido, domicilio, telefono, mail);
-				soc.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);
+				if (!nombreProfesional.toString().isEmpty()){
+				soc.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);}
 				soc.inscribirSocio(codigoIns);
 			}
 			
@@ -173,7 +174,9 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 				String observaciones = result.getString(9);
 				
 				Socio soc = new Socio(deenei, nombre, apellido, domicilio, telefono, mail);
+				if (!fechaCertificado.isEmpty()){
 				soc.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);
+				}
 				rta.add(soc);
 				
 			}

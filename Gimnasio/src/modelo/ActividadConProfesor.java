@@ -9,7 +9,10 @@ public class ActividadConProfesor extends Actividad{
 	public ActividadConProfesor(Integer id, String desc, Integer profesor){
 		super.idActividad = id;
 		super.descripcion = desc;
-		this.idProfe= profesor;
+		this.idProfe
+		
+		
+		= profesor;
 		super.clases = new Vector<Clase>();
 	}
 
