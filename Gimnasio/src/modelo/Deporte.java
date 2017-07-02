@@ -19,7 +19,13 @@ public class Deporte {
 		this.actividades = new Vector<Actividad>();
 	}
 
-
+	public void agregarActividad(Actividad actividad){
+		this.actividades.addElement(actividad);
+	}
+	
+	public void eliminarActividad(Actividad actividad){
+		this.actividades.remove(actividad);
+	}
 
 	public Integer getCodigo() {
 		return codigo;

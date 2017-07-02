@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
+import modelo.Actividad;
 import modelo.ActividadConProfesor;
 
 public class AdminPersistActividadConP extends AdministradorPersistencia{
@@ -127,7 +128,7 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 	public void delete(Object d) {
 		try
 		{
-			ActividadConProfesor act = (ActividadConProfesor)d;
+			Actividad act = (Actividad)d;
 			
 			deleteDepAct(act.getIdActividad());
 			

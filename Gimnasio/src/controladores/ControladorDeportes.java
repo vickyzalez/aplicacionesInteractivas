@@ -21,6 +21,10 @@ public class ControladorDeportes {
 
 	public ControladorDeportes(){
 		deportes = AdminPersistDeporte.getInstancia().selectAll();
+		cargarActividades();
+		actividades = this.actividadesBD();
+		cargarClases();
+		clases = AdminPersistClase.getInstancia().selectAll();
 	}
 
 	//Singleton
@@ -31,6 +35,42 @@ public class ControladorDeportes {
 		return instancia;
 	}
 
+	//devuelve todas las actividades dadas de alta en el sist
+	private Vector<Actividad> actividadesBD(){
+		 Vector<Actividad> actividades = new Vector<Actividad>();
+		 actividades.addAll(AdminPersistActividadConP.getInstancia().selectAll());
+		 actividades.addAll(AdminPersistActividadSinP.getInstancia().selectAll());
+		 return actividades;
+	 }
+	
+	//trae todas las actividades que tiene un deporte
+	private void cargarActividades(){
+		for (Deporte deporte : this.deportes) {
+			
+			Vector<Integer> actividades = AdminPersistDeporte.getInstancia().mostrarActividades(deporte.getCodigo());
+			
+			for (Integer act : actividades) {
+				Actividad actDep = buscarActividadBuffer(act);
+				deporte.agregarActividad(actDep);
+			}			
+		}
+	}
+	
+	//trae todas las clases que tiene una actividad
+		private void cargarClases(){
+			for (Actividad actividad : this.actividades) {
+				
+				Vector<Integer> clases = AdminPersistClase.getInstancia().mostrarClases(actividad.getIdActividad());
+				
+				for (Integer claseA : clases) {
+					ClaseAct clase = buscarClaseBuffer(claseA);
+					actividad.agregarClase(clase);
+			}			
+		}
+	}			
+
+	
+	//buscadores
 	Deporte buscarDeporteBuffer (Integer codigo){
 		
 		for (Deporte deporte : deportes) {
@@ -113,7 +153,7 @@ public class ControladorDeportes {
 		
 	}
 	
-	public void altaActividadSinProfe(Integer idDep, Integer id, String desc){
+	public void agregarActividadSinProfe(Integer idDep, Integer id, String desc){
 		Actividad act = buscarActividadBuffer(id);
 		if (act == null) {
 			
@@ -121,6 +161,8 @@ public class ControladorDeportes {
 			
 			AdminPersistActividadSinP.getInstancia().insert(acti);
 			this.actividades.addElement(acti);
+			Deporte dep = buscarDeporteBuffer(idDep);
+			dep.agregarActividad(acti);
 			
 		} else {
 			System.out.println("La actividad ya esta dada de alta en el sistema");
@@ -129,7 +171,7 @@ public class ControladorDeportes {
 		
 	}
 	
-	public void altaActividadConProfe(Integer idDep, Integer id, String desc, Integer idProfe){
+	public void agregarActividadConProfe(Integer idDep, Integer id, String desc, Integer idProfe){
 		Actividad act = buscarActividadBuffer(id);
 		if (act == null) {
 			
@@ -137,6 +179,8 @@ public class ControladorDeportes {
 			
 			AdminPersistActividadConP.getInstancia().insert(acti);
 			this.actividades.addElement(acti);
+			Deporte dep = buscarDeporteBuffer(idDep);
+			dep.agregarActividad(acti);
 			
 		} else {
 			System.out.println("La actividad ya esta dada de alta en el sistema");
@@ -145,7 +189,7 @@ public class ControladorDeportes {
 		
 	}
 	
-	public void altaClase(Integer idAct, Integer idClase, Integer desde, Integer hasta, Integer idDia){
+	public void agregarClase(Integer idAct, Integer idClase, Integer desde, Integer hasta, Integer idDia){
 		ClaseAct clase = buscarClaseBuffer(idClase);
 		if (clase == null) {
 			
@@ -153,6 +197,8 @@ public class ControladorDeportes {
 			
 			AdminPersistClase.getInstancia().insert(classe);
 			this.clases.addElement(classe);
+			Actividad act = buscarActividadBuffer(idAct);
+			act.agregarClase(classe);
 			
 		} else {
 			System.out.println("La clase ya esta dada de alta en el sistema");
@@ -161,14 +207,13 @@ public class ControladorDeportes {
 		
 	}
 	
-	//TODO método
+	
 		public void modificarDeporte(Integer codigo, String titulo, String descripcion){
 			Deporte dep = buscarDeporteBuffer(codigo);
 			if (dep == null) {
 				System.out.println("El deporte no se encuentra registrado en el sistema");
 			} else {
 				this.deportes.removeElement(dep);
-				dep.setCodigo(codigo);
 				dep.setTitulo(titulo);
 				dep.setDescripcion(descripcion);
 				
@@ -180,43 +225,90 @@ public class ControladorDeportes {
 	}
 		
 	//TODO método
-	public void modificarActividadConProfe(){
-		
+	public void modificarActividadConProfe(Integer id, String desc, Integer idProfe){
+		ActividadConProfesor act = (ActividadConProfesor) buscarActividadBuffer(id);
+		if (act == null) {
+			System.out.println("La actividad no se encuentra registrado en el sistema");
+		} else {
+			this.actividades.removeElement(act);
+			act.setDescripcion(desc);
+			act.setProfesor(idProfe);
+			
+			AdminPersistActividadConP.getInstancia().update(act);
+			this.actividades.addElement(act);
+
+			System.out.println("La actividad ha sido modificado");
+		}
 	}
 
 	//TODO método
-	public void modificarActividadSinProfe(){
-		
+	public void modificarActividadSinProfe(Integer id, String desc){
+		ActividadSinProfesor act = (ActividadSinProfesor) buscarActividadBuffer(id);
+		if (act == null) {
+			System.out.println("La actividad no se encuentra registrado en el sistema");
+		} else {
+			this.actividades.removeElement(act);
+			act.setDescripcion(desc);
+			
+			AdminPersistActividadSinP.getInstancia().update(act);
+			this.actividades.addElement(act);
+
+			System.out.println("La activadad ha sido modificado");
+		}
 	}
 	
 	//TODO método
-	public void modificarClase(){
-		
+	public void modificarClase(Integer idClase, Integer desde, Integer hasta, Integer idDia){
+		ClaseAct claseA = buscarClaseBuffer(idClase);
+		if (claseA == null) {
+			System.out.println("La clase no se encuentra registrado en el sistema");
+		} else {
+			this.clases.removeElement(claseA);
+			claseA.setHoraDesde(desde);
+			claseA.setHoraHasta(hasta);
+			claseA.setDia(idDia);
+			
+			AdminPersistClase.getInstancia().update(claseA);
+			this.clases.addElement(claseA);
+
+			System.out.println("La clase ha sido modificado");
+		}
 	}
 		
 	//TODO método
-	public void bajaDeporte(){
-		
+	public void bajaDeporte(Integer id){
+		Deporte dep = buscarDeporteBuffer(id);
+		if (dep == null) {
+			System.out.println("El deporte no se encuentra registrado en el sistema");
+		} else {
+			AdminPersistDeporte.getInstancia().delete(dep);
+			this.deportes.removeElement(dep);
+			System.out.println("El deporte "+ id + " ha sido eliminado");
+		}
 	}
 	
 	//TODO método
-	public void bajaActividad(){
-		
+	public void bajaActividad(Integer id){
+		Actividad act = buscarActividadBuffer(id);
+		if (act == null) {
+			System.out.println("La actividad no se encuentra registrada en el sistema");
+		} else {
+			AdminPersistActividadConP.getInstancia().delete(act);
+			this.actividades.removeElement(act);
+			System.out.println("La actividad "+ id + " ha sido eliminada");
+		}
 	}
 	
 	//TODO método
-	public void bajaClase(){
-		
-	}
-		
-	//TODO método
-	public void agregarActividad(){
-		
-	}
-	
-	//TODO método
-	public void agregarClase(){
-		
+	public void bajaClase(Integer id){
+		ClaseAct claseA = buscarClaseBuffer(id);
+		if (claseA == null) {
+			System.out.println("La clase no se encuentra registrada en el sistema");
+		} else {
+			AdminPersistClase.getInstancia().delete(claseA);
+			this.clases.removeElement(claseA);
+			System.out.println("La clase "+ id + " ha sido eliminada");
+		}
 	}
 	
 	//TODO método, para poder generar notificaciones

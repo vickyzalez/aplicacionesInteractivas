@@ -33,7 +33,13 @@ public abstract class Actividad {
 		this.idDeporte = idDeporte;
 	}
 
+	public void agregarClase(ClaseAct claseA){
+		this.clases.addElement(claseA);
+	}
 	
+	public void eliminarClase(ClaseAct clase){
+		this.clases.remove(clase);
+	}
 	
 	
 }

@@ -203,7 +203,34 @@ public class AdminPersistClase extends AdministradorPersistencia{
 	}
 
 	
+	public Vector<Integer> mostrarClases(Integer idAct)
+	{
+		try
+		{
+			
 	
+			Vector <Integer>rta = new Vector<Integer>();
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement( "Select * from TPAI.dbo.Actividad_Clase where codigoActividad = ?");
+			s.setInt(1,idAct);
+			ResultSet result = s.executeQuery();
+			
+			while (result.next())
+			{
+				Integer codigo = result.getInt(2);
+				
+				rta.add(codigo);
+				
+			}
+			con.close();
+			return rta;
+		}
+		catch(Exception e)
+		{
+			System.out.println("No se pudo mostrar las clases");
+		}
+		return null;
+	}
 
 
 }

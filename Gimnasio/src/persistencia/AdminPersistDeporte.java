@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
+import modelo.Actividad;
 import modelo.Deporte;
 
 public class AdminPersistDeporte extends AdministradorPersistencia{
@@ -147,6 +148,35 @@ public class AdminPersistDeporte extends AdministradorPersistencia{
 		catch(Exception e)
 		{
 			System.out.println("No se pudo mostrar los deportes");
+		}
+		return null;
+	}
+	
+	public Vector<Integer> mostrarActividades(Integer idDep)
+	{
+		try
+		{
+			
+	
+			Vector <Integer>rta = new Vector<Integer>();
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement( "Select * from TPAI.dbo.Deporte_Actividad where codigoDeporte = ?");
+			s.setInt(1,idDep);
+			ResultSet result = s.executeQuery();
+			
+			while (result.next())
+			{
+				Integer codigo = result.getInt(2);
+				
+				rta.add(codigo);
+				
+			}
+			con.close();
+			return rta;
+		}
+		catch(Exception e)
+		{
+			System.out.println("No se pudo mostrar las actividades");
 		}
 		return null;
 	}
