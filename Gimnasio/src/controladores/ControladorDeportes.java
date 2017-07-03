@@ -14,7 +14,7 @@ import persistencia.AdminPersistDeporte;
 
 public class ControladorDeportes {
 	private static ControladorDeportes instancia;
-	private Cronograma cronograma; //TODO falta hacer cronograma
+	private Cronograma cronograma;
 	private Vector<Deporte> deportes;
 	private Vector<Actividad> actividades;
 	private Vector<ClaseAct> clases;
@@ -25,6 +25,7 @@ public class ControladorDeportes {
 		actividades = this.actividadesBD();
 		cargarClases();
 		clases = AdminPersistClase.getInstancia().selectAll();
+		cronograma = new Cronograma();
 	}
 
 	//Singleton
@@ -224,7 +225,6 @@ public class ControladorDeportes {
 			}
 	}
 		
-	//TODO método
 	public void modificarActividadConProfe(Integer id, String desc, Integer idProfe){
 		ActividadConProfesor act = (ActividadConProfesor) buscarActividadBuffer(id);
 		if (act == null) {
@@ -241,7 +241,7 @@ public class ControladorDeportes {
 		}
 	}
 
-	//TODO método
+
 	public void modificarActividadSinProfe(Integer id, String desc){
 		ActividadSinProfesor act = (ActividadSinProfesor) buscarActividadBuffer(id);
 		if (act == null) {
@@ -257,7 +257,7 @@ public class ControladorDeportes {
 		}
 	}
 	
-	//TODO método
+
 	public void modificarClase(Integer idClase, Integer desde, Integer hasta, Integer idDia){
 		ClaseAct claseA = buscarClaseBuffer(idClase);
 		if (claseA == null) {
@@ -275,7 +275,7 @@ public class ControladorDeportes {
 		}
 	}
 		
-	//TODO método
+	
 	public void bajaDeporte(Integer id){
 		Deporte dep = buscarDeporteBuffer(id);
 		if (dep == null) {
@@ -287,7 +287,7 @@ public class ControladorDeportes {
 		}
 	}
 	
-	//TODO método
+
 	public void bajaActividad(Integer id){
 		Actividad act = buscarActividadBuffer(id);
 		if (act == null) {
@@ -299,7 +299,7 @@ public class ControladorDeportes {
 		}
 	}
 	
-	//TODO método
+
 	public void bajaClase(Integer id){
 		ClaseAct claseA = buscarClaseBuffer(id);
 		if (claseA == null) {
@@ -311,13 +311,42 @@ public class ControladorDeportes {
 		}
 	}
 	
-	//TODO método, para poder generar notificaciones
-	public void cancelarClaseDelDia(){
+	//TODO metodo, para poder generar notificaciones
+	public void cancelarClase(){
 
 	}
 	
-	//TODO método
+	//TODO ver cronograma
 	public void generarCronograma(){
-		
+		for (ClaseAct clase : clases) {
+			switch (clase.getDia()) {
+			case 1:
+				this.cronograma.getLunes().addElement(clase);
+				break;
+				
+			case 2:
+				this.cronograma.getMartes().addElement(clase);
+				break;
+				
+			case 3:
+				this.cronograma.getMiercoles().addElement(clase);
+				break;
+			
+			case 4:
+				this.cronograma.getJueves().addElement(clase);
+				break;
+
+			case 5:
+				this.cronograma.getViernes().addElement(clase);
+				break;
+			
+			case 6:
+				this.cronograma.getSabado().addElement(clase);
+				break;
+				
+			default:
+				break;
+			}
+		}
 	}
 }

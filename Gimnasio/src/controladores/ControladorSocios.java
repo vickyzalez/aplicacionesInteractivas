@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import modelo.Abono;
+import modelo.ClaseAct;
 import modelo.Inscripcion;
 import modelo.InscripcionCorporativa;
 import modelo.InscripcionNormal;
@@ -22,6 +23,7 @@ public class ControladorSocios {
 	public ControladorSocios(){
 		this.socios = AdminPersistSocio.getInstancia().selectAll();
 		this.inscripciones = AdminPersistInscrip.getInstancia().selectAll();
+		cargarClasesSocios();
 	}
 
 	// Singleton
@@ -36,6 +38,17 @@ public class ControladorSocios {
 		return socios;
 	}
 	
+	private void cargarClasesSocios(){
+		for (Socio socio : this.socios) {
+			
+			Vector<Integer> clases = AdminPersistSocio.getInstancia().mostrarClases(socio.getCodigoIns());
+			
+			for (Integer clase : clases) {
+				ClaseAct cla = ControladorDeportes.getInstancia().buscarClaseBuffer(clase);
+				socio.agregarClase(cla);
+			}			
+		}
+	}
 	
 	Socio buscarSocioBuffer (Integer dni){
 		
@@ -175,20 +188,20 @@ public class ControladorSocios {
 		}
 	}
 	
-	//Tercero, se anotará a todas las actividades que desee
-	//TODO iscribir actividades
-//	public void inscribirAActividades(Integer dniSocio, ArrayList<Actividad> actividades){
-//		Socio socio = buscarSocio(dniSocio);
-//		if (socio == null) {
-//			System.out.println("El socio no se encuentra registrado en el sistema");
-//		} else {	
-//		for (Actividad a: actividades){
-//			socio.getInscripcion().agregarActividad(a);
-//		}
-//	}
-//	}
+	//Tercero, se anota a las clases que desee
+
+	public void inscribirAClase(Integer dniSocio, Integer idClase){
+		Socio socio = buscarSocioBuffer(dniSocio);
+		if (socio == null) {
+			System.out.println("El socio no se encuentra registrado en el sistema");
+		} else {	
+		
+		AdminPersistInscrip.getInstancia().inscribirAClase(socio.getCodigoIns(), idClase);
+		
+		socio.agregarClase(ControladorDeportes.getInstancia().buscarClaseBuffer(idClase));
+	}
+}
 	
-	//TODO validar, es la fachada del socio
 	
 	
 	

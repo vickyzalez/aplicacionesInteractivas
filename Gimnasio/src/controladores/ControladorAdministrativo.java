@@ -25,7 +25,7 @@ public class ControladorAdministrativo {
 	private Vector<Empleado> empleados;
 	private Vector<Empresa> empresas;
 	private Vector<Abono> abonos;
-	private Vector<Profesor> profesores; //Ver si es necesario
+	private Vector<Profesor> profesores; 
 	private Vector<DiaSemana> diasSemana;
 
 	

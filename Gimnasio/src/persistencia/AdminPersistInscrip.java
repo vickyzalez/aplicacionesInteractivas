@@ -94,6 +94,24 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 		
 	}
 
+	public void inscribirAClase(Integer idInsc, Integer idClase) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Inscripcion_Clase values (?,?)");
+			s.setInt(1, idInsc);
+			s.setInt(2, idClase);
+			
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo insertar la nueva inscripcion");
+		}
+		
+		
+	}
 	@Override
 	public void update(Object o) {
 		try
@@ -111,8 +129,9 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 	public void delete(Object d) {
 		try
 		{
-			Connection con = ConectorPersist.getInstance().getConnection();
 			Inscripcion insc = (Inscripcion)d;
+			eliminarInscripClase(insc.getCodigo());
+			Connection con = ConectorPersist.getInstance().getConnection();
 			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Inscripciones where codigo = ?");
 			s.setInt(1, insc.getCodigo());
 			s.execute();
@@ -126,6 +145,23 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 
 		
 	}
+	
+	public void eliminarInscripClase(Integer idInsc) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Inscripcion_Clase where codigoInscripcion = ?");
+			s.setInt(1, idInsc);
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo eliminar a la inscripcion");
+		}
+		
+	}
+
 	
 	public Vector<Inscripcion> selectAll()
 	{

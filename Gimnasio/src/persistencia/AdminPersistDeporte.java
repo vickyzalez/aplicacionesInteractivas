@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
-import modelo.Actividad;
 import modelo.Deporte;
 
 public class AdminPersistDeporte extends AdministradorPersistencia{
@@ -104,8 +103,10 @@ public class AdminPersistDeporte extends AdministradorPersistencia{
 	public void delete(Object d) {
 		try
 		{
-			Connection con = ConectorPersist.getInstance().getConnection();
 			Deporte dep = (Deporte)d;
+			deleteDeporteAct(dep.getCodigo());
+			
+			Connection con = ConectorPersist.getInstance().getConnection();
 			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Deportes where codigo = ?");
 			s.setInt(1, dep.getCodigo());
 			s.execute();
@@ -117,6 +118,22 @@ public class AdminPersistDeporte extends AdministradorPersistencia{
 		}
 		
 
+		
+	}
+	
+	public void deleteDeporteAct(Integer idDep) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Derpote_Actividad where codigoDeporte = ?");
+			s.setInt(1, idDep);
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo eliminar el deporte");
+		}
 		
 	}
 	

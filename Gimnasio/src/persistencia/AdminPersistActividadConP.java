@@ -131,6 +131,7 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 			Actividad act = (Actividad)d;
 			
 			deleteDepAct(act.getIdActividad());
+			deleteActClase(act.getIdActividad());
 			
 			Connection con = ConectorPersist.getInstance().getConnection();
 			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Actividades where codigo = ?");
@@ -163,6 +164,21 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 		
 	}
 	
+	public void deleteActClase(Integer idAct) {
+		try
+		{
+			Connection con = ConectorPersist.getInstance().getConnection();
+			PreparedStatement s = con.prepareStatement("delete from TPAI.dbo.Actividad_Clase where codigoActividad = ?");
+			s.setInt(1, idAct);
+			s.execute();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se pudo eliminar a la actividad");
+		}
+		
+	}
 	
 	public Vector<ActividadConProfesor> selectAll()
 	{

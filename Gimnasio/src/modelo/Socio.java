@@ -2,6 +2,7 @@ package modelo;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Vector;
 
 public class Socio {
 	
@@ -13,6 +14,7 @@ public class Socio {
 	private String mail;
 	private AptoMedico am;
 	private Integer codigoIns;
+	private Vector<ClaseAct> clases;
 	
 	
 	public Socio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail) {
@@ -23,6 +25,7 @@ public class Socio {
 		this.telefono = telefono;
 		this.mail = mail;
 		this.am = new AptoMedico();
+		this.clases = new Vector<ClaseAct>();
 		
 	
 	}
@@ -44,6 +47,13 @@ public class Socio {
 
 	}
 	
+	public void agregarClase(ClaseAct clase){
+		this.clases.addElement(clase);
+	}
+	
+	public void eliminarClase(Integer clase){
+		this.clases.remove(clase);
+	}
 	
 	//Getters & Setters 
 	
@@ -95,6 +105,22 @@ public class Socio {
 
 	public Integer getInscripcion() {
 		return codigoIns;
+	}
+
+	public Integer getCodigoIns() {
+		return codigoIns;
+	}
+
+	public void setCodigoIns(Integer codigoIns) {
+		this.codigoIns = codigoIns;
+	}
+
+	public Vector<ClaseAct> getClases() {
+		return clases;
+	}
+
+	public void setClases(Vector<ClaseAct> clases) {
+		this.clases = clases;
 	}	
 
 
