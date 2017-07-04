@@ -1,14 +1,21 @@
 package modelo;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 public abstract class Inscripcion {
 	protected Integer codigo;
 	protected Integer dniSocio; 
 	protected Integer codigoAbono;
-	protected ArrayList<Actividad> actividades;
-	//TODO Falta ver actividades
-
+	protected Vector<ClaseAct> clases;
+	
+	
+	public void agregarClase(ClaseAct clase){
+		this.clases.addElement(clase);
+	}
+	
+	public void eliminarClase(Integer clase){
+		this.clases.remove(clase);
+	}
 	
 	public Integer getDniSocio() {
 		return dniSocio;
@@ -18,13 +25,6 @@ public abstract class Inscripcion {
 		this.dniSocio = dniSocio;
 	}
 
-	public ArrayList<Actividad> getActividades() {
-		return actividades;
-	}
-
-	public void setActividades(ArrayList<Actividad> actividades) {
-		this.actividades = actividades;
-	}
 
 	public Integer getCodigoAbono() {
 		return codigoAbono;
@@ -41,5 +41,11 @@ public abstract class Inscripcion {
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
+
+	public Vector<ClaseAct> getClases() {
+		return clases;
+	}
+	
+	
 
 }

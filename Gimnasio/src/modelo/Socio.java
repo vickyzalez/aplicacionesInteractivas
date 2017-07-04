@@ -14,7 +14,7 @@ public class Socio {
 	private String mail;
 	private AptoMedico am;
 	private Integer codigoIns;
-	private Vector<ClaseAct> clases;
+	private Vector<String> mails;
 	
 	
 	public Socio(Integer dni, String nombre, String apellido, String domicilio, Integer telefono, String mail) {
@@ -25,7 +25,6 @@ public class Socio {
 		this.telefono = telefono;
 		this.mail = mail;
 		this.am = new AptoMedico();
-		this.clases = new Vector<ClaseAct>();
 		
 	
 	}
@@ -47,13 +46,7 @@ public class Socio {
 
 	}
 	
-	public void agregarClase(ClaseAct clase){
-		this.clases.addElement(clase);
-	}
 	
-	public void eliminarClase(Integer clase){
-		this.clases.remove(clase);
-	}
 	
 	//Getters & Setters 
 	
@@ -115,13 +108,7 @@ public class Socio {
 		this.codigoIns = codigoIns;
 	}
 
-	public Vector<ClaseAct> getClases() {
-		return clases;
+	public void recibirMail(String mail){
+		this.mails.addElement(mail);
 	}
-
-	public void setClases(Vector<ClaseAct> clases) {
-		this.clases = clases;
-	}	
-
-
 }

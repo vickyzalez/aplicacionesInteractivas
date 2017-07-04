@@ -1,19 +1,11 @@
 package controladores;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Vector;
 
-import modelo.Abono;
-import modelo.Actividad;
 import modelo.ClaseAct;
-import modelo.Inscripcion;
 import modelo.Socio;
-import persistencia.AdminPersistAbono;
-import persistencia.AdminPersistInscrip;
-import persistencia.AdminPersistSocio;
 
 public class FachadaMolinete {
 	
@@ -34,16 +26,16 @@ public class FachadaMolinete {
 			return false;
 		}
 		
-		Vector<Actividad> actividades = null; //acá se le pondrá las actividades del socio que se sacarán de la inscrip
+		 
+		Vector<ClaseAct> clases = ControladorSocios.getInstancia().obtenerClasesSocio(socio);
 		
-		for (Actividad actividad : actividades) {
-			for (ClaseAct clase : actividad.getClases()) {
-				
-				if((today.getTime() > clase.getHoraDesde()) && (today.getTime() < clase.getHoraHasta())){
-					return true;
-				}
+		for (ClaseAct clase : clases) {
+			
+			if((today.getTime() > clase.getHoraDesde()) && (today.getTime() < clase.getHoraHasta())){
+				return true;
 			}
 		}
+		
 		
 		return false;	
 	}	

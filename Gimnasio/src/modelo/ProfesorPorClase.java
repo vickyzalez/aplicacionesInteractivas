@@ -28,8 +28,14 @@ public class ProfesorPorClase extends Profesor {
 	
 	@Override
 	public Float calcularSueldo(){
-		//hacer el algoritmo
-		return this.valorPorHora;
+		
+		Float montoHoras = 0f;
+		
+		for (ClaseAct claseAct : clases) {
+			montoHoras = montoHoras + ((claseAct.getHoraHasta() - claseAct.getHoraDesde()) * (this.valorPorHora));
+		}
+		Float aPagar = (montoHoras - this.retencion) * (this.impuesto/100);
+		return aPagar;
 	}
 
 	public Float getValorPorHora() {

@@ -11,6 +11,7 @@ import modelo.Empresa;
 import modelo.Profesor;
 import modelo.ProfesorConSueldo;
 import modelo.ProfesorPorClase;
+import modelo.Recibo;
 import persistencia.AdminPersistAbono;
 import persistencia.AdminPersistDiaSemana;
 import persistencia.AdminPersistEmpleado;
@@ -27,6 +28,7 @@ public class ControladorAdministrativo {
 	private Vector<Abono> abonos;
 	private Vector<Profesor> profesores; 
 	private Vector<DiaSemana> diasSemana;
+	private Vector<Recibo> recibos;
 
 	
 
@@ -36,6 +38,7 @@ public class ControladorAdministrativo {
 		abonos = AdminPersistAbono.getInstancia().selectAll();
 		profesores = this.profesoresBD();
 		diasSemana = AdminPersistDiaSemana.getInstancia().selectAll();
+		recibos = new Vector<Recibo>();
 		
 	}
 
@@ -125,7 +128,7 @@ public class ControladorAdministrativo {
 	
 	 
 	 //Busca al profesor tanto si es con sueldo como si es con valor por hora
-	 private Profesor buscarProfesorEnBD(Integer dni){ //TODO Faltaaa
+	 private Profesor buscarProfesorEnBD(Integer dni){ 
 		 
 		 ProfesorConSueldo prof1 = AdminPersistProfesorSueldo.getInstancia().buscarProfesorSueldo(dni);
 		 if (prof1 == null){
@@ -288,11 +291,22 @@ public class ControladorAdministrativo {
 			contratados.addAll(profesores);
 			
 			for (Contratado contratado : contratados) {
-				contratado.calcularSueldo();
-				//TODO falta ver cómo se paga y que se hace con el sueldo
-				
+				Float valor = contratado.calcularSueldo();
+				recibos.addElement(new Recibo(contratado.getDni(), valor));
 			}
 			
 		}
+		
+		public Vector<Recibo> verRecibos(){
+			return this.recibos;
+		}
 	
+		//servira para mostrar el combo de dias por pantalla
+		public Vector<String> comboDias(){
+			Vector<String> dias = new Vector<String>();
+			for (DiaSemana dia : diasSemana) {
+				dias.add(dia.getDia());
+			}
+			return dias;
+		}
 }

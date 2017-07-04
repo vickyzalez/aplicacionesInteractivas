@@ -1,4 +1,5 @@
 package controladores;
+import java.util.Observable;
 import java.util.Vector;
 
 import modelo.Actividad;
@@ -12,7 +13,7 @@ import persistencia.AdminPersistActividadSinP;
 import persistencia.AdminPersistClase;
 import persistencia.AdminPersistDeporte;
 
-public class ControladorDeportes {
+public class ControladorDeportes extends Observable{
 	private static ControladorDeportes instancia;
 	private Cronograma cronograma;
 	private Vector<Deporte> deportes;
@@ -308,13 +309,12 @@ public class ControladorDeportes {
 			AdminPersistClase.getInstancia().delete(claseA);
 			this.clases.removeElement(claseA);
 			System.out.println("La clase "+ id + " ha sido eliminada");
+
+			//metodo observable para enviar mail al socio
+			this.notifyObservers(claseA);
 		}
 	}
 	
-	//TODO metodo, para poder generar notificaciones
-	public void cancelarClase(){
-
-	}
 	
 	//TODO ver cronograma
 	public void generarCronograma(){

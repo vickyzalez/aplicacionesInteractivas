@@ -1,7 +1,7 @@
 package modelo;
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.Vector;
 
 public class InscripcionCorporativa extends Inscripcion {
 	
@@ -10,12 +10,12 @@ public class InscripcionCorporativa extends Inscripcion {
 	
 
 	public InscripcionCorporativa(Integer codigo, Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
-		super.actividades = new ArrayList<Actividad>();
 		super.codigo = codigo;
 		super.dniSocio = dniSocio;
 		super.codigoAbono = codAbono;
 		this.codEmpresa = codEmpresa;
 		this.fecha = fecha;
+		super.clases = new Vector<ClaseAct>();
 		
 	}
 

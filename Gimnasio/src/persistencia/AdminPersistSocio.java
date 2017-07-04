@@ -191,36 +191,7 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 	}
 
 	
-	public Vector<Integer> mostrarClases(Integer idInsc)
-	{
-		try
-		{
-			
 	
-			Vector <Integer>rta = new Vector<Integer>();
-			Connection con = ConectorPersist.getInstance().getConnection();
-			PreparedStatement s = con.prepareStatement( "Select * from TPAI.dbo.Inscripcion_Clase where codigoInscripcion = ?");
-			s.setInt(1,idInsc);
-			ResultSet result = s.executeQuery();
-			
-			while (result.next())
-			{
-				Integer codigo = result.getInt(2);
-				
-				rta.add(codigo);
-				
-			}
-			con.close();
-			return rta;
-		}
-		catch(Exception e)
-		{
-			System.out.println("No se pudo mostrar las clases");
-		}
-		return null;
-	}
-
-
 
 }
 

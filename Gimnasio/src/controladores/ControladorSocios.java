@@ -3,9 +3,12 @@ package controladores;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
 import modelo.Abono;
+import modelo.Actividad;
 import modelo.ClaseAct;
 import modelo.Inscripcion;
 import modelo.InscripcionCorporativa;
@@ -14,7 +17,7 @@ import modelo.Socio;
 import persistencia.AdminPersistInscrip;
 import persistencia.AdminPersistSocio;
 
-public class ControladorSocios {
+public class ControladorSocios implements Observer{
 	private static ControladorSocios instancia;
 	private Vector<Socio> socios;
 	private Vector<Inscripcion> inscripciones;
@@ -39,13 +42,13 @@ public class ControladorSocios {
 	}
 	
 	private void cargarClasesSocios(){
-		for (Socio socio : this.socios) {
+		for (Inscripcion insc : this.inscripciones) {
 			
-			Vector<Integer> clases = AdminPersistSocio.getInstancia().mostrarClases(socio.getCodigoIns());
+			Vector<Integer> clases = AdminPersistInscrip.getInstancia().mostrarClases(insc.getCodigo());
 			
 			for (Integer clase : clases) {
 				ClaseAct cla = ControladorDeportes.getInstancia().buscarClaseBuffer(clase);
-				socio.agregarClase(cla);
+				insc.agregarClase(cla);
 			}			
 		}
 	}
@@ -190,15 +193,15 @@ public class ControladorSocios {
 	
 	//Tercero, se anota a las clases que desee
 
-	public void inscribirAClase(Integer dniSocio, Integer idClase){
-		Socio socio = buscarSocioBuffer(dniSocio);
-		if (socio == null) {
-			System.out.println("El socio no se encuentra registrado en el sistema");
+	public void inscribirAClase(Integer idInsc, Integer idClase){
+		Inscripcion insc = buscarInscripBuffer(idInsc);
+		if (insc == null) {
+			System.out.println("La inscripcion no esta dada de alta en el sistema");
 		} else {	
 		
-		AdminPersistInscrip.getInstancia().inscribirAClase(socio.getCodigoIns(), idClase);
+		AdminPersistInscrip.getInstancia().inscribirAClase(insc.getCodigo(), idClase);
 		
-		socio.agregarClase(ControladorDeportes.getInstancia().buscarClaseBuffer(idClase));
+		insc.agregarClase(ControladorDeportes.getInstancia().buscarClaseBuffer(idClase));
 	}
 }
 	
@@ -230,6 +233,30 @@ public class ControladorSocios {
 		
 		return abono.getVigencia();
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		ClaseAct clase = (ClaseAct)arg;
+		Integer idClase = clase.getIdAct();
+		for (Socio socio : this.socios) {
+			//si el socio esta inscripto se le mandara mail
+			if(socio.getInscripcion() == idClase){
+				Actividad act = ControladorDeportes.getInstancia().buscarActividadBuffer(clase.getIdAct());
+				String claseSocio = act.getDescripcion();
+				socio.recibirMail("La clase " + claseSocio + " ha sido cancelada");
+			}
+		}
+		
+	}
+	
+	//metodo para la fachada del socio
+	public Vector<ClaseAct> obtenerClasesSocio(Socio socio){
+		
+		Inscripcion insc = buscarInscripBuffer(socio.getCodigoIns());
+		
+		return insc.getClases();
+	}
+
 
 
 }
