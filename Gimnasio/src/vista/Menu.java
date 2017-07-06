@@ -129,7 +129,9 @@ public class Menu extends javax.swing.JFrame implements ActionListener{
 			this.setVisible(false);
 		}
 		if(e.getSource() == gestionarDeporte){
-			
+			VentanaDeporte a = VentanaDeporte.getVentanaDeporte();
+			a.setVisible(true);
+			this.setVisible(false);
 		}
 		if(e.getSource()==gestionsocios){
 			FrameSocio s = FrameSocio.getFrameSocio();

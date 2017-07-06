@@ -61,7 +61,7 @@ public class AdminPersistDeporte extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Deporte dep = (Deporte)o;
-			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Deporte values (?,?,?)");
+			PreparedStatement s = con.prepareStatement("insert into TPAI.dbo.Deportes values (?,?,?)");
 			s.setInt(1, dep.getCodigo());
 			s.setString(2, dep.getTitulo());
 			s.setString(3,dep.getDescripcion());
@@ -82,9 +82,9 @@ public class AdminPersistDeporte extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Deporte dep = (Deporte)o;
-			PreparedStatement s = con.prepareStatement("update Deportes " +
+			PreparedStatement s = con.prepareStatement("update TPAI.dbo.Deportes " +
 					"set titulo = ?," +
-					"set descripcion =?," +
+					"descripcion =? " +
 					"where codigo =?");
 			s.setString(1, dep.getTitulo());
 			s.setString(2,dep.getDescripcion());

@@ -37,6 +37,18 @@ public class ControladorDeportes extends Observable{
 		return instancia;
 	}
 
+	public Vector<Actividad> getActividades() {
+		return actividades;
+	}
+
+	public Vector<ClaseAct> getClases() {
+		return clases;
+	}
+
+	public Vector<Deporte> getDeportes() {
+		return deportes;
+	}
+
 	//devuelve todas las actividades dadas de alta en el sist
 	private Vector<Actividad> actividadesBD(){
 		 Vector<Actividad> actividades = new Vector<Actividad>();
