@@ -25,9 +25,9 @@ import javax.swing.WindowConstants;
 */
 public class LOGIN extends javax.swing.JFrame implements ActionListener {
 	private JDesktopPane CONTENEDOR;
-	private JTextField TEXTCONTRASEÑA;
+	private JTextField TEXTCONTRASENIA;
 	private JButton LOGIN;
-	private JLabel contraseña;
+	private JLabel contrasenia;
 	private JTextField TEXTUSUARIO;
 	private JLabel usuario;
 	private JLabel INICIAR;
@@ -75,15 +75,15 @@ public class LOGIN extends javax.swing.JFrame implements ActionListener {
 					TEXTUSUARIO.setBounds(140, 99, 111, 23);
 				}
 				{
-					contraseña = new JLabel();
-					CONTENEDOR.add(contraseña);
-					contraseña.setText("CONTRASEÑA:");
-					contraseña.setBounds(27, 142, 89, 26);
+					contrasenia = new JLabel();
+					CONTENEDOR.add(contrasenia);
+					contrasenia.setText("CONTRASENIsA:");
+					contrasenia.setBounds(27, 142, 89, 26);
 				}
 				{
-					TEXTCONTRASEÑA = new JTextField();
-					CONTENEDOR.add(TEXTCONTRASEÑA);
-					TEXTCONTRASEÑA.setBounds(140, 142, 111, 20);
+					TEXTCONTRASENIA = new JTextField();
+					CONTENEDOR.add(TEXTCONTRASENIA);
+					TEXTCONTRASENIA.setBounds(140, 142, 111, 20);
 				}
 				{
 					LOGIN = new JButton();

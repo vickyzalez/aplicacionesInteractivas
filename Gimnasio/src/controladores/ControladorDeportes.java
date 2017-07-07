@@ -1,4 +1,6 @@
 package controladores;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Vector;
 
@@ -48,7 +50,26 @@ public class ControladorDeportes extends Observable{
 	public Vector<Deporte> getDeportes() {
 		return deportes;
 	}
-
+	
+	public List<String> IdClases(){
+		List<String> idClases = new ArrayList<String>();
+		for (int i=0; i<this.clases.size();i++){
+			int idClass = this.clases.get(i).getIdClase();
+			String  idClase = String.valueOf(idClass);
+			idClases.add(idClase);
+		}
+		return idClases;
+	}
+	
+	public List<String> idDias(){
+		List<String> idDias = new ArrayList<String>();
+		for (int i=0; i<this.clases.size();i++){
+			int iddia = this.clases.get(i).getDia();
+			String  id = String.valueOf(iddia);
+			idDias.add(id);
+		}
+		return idDias;
+	}
 	//devuelve todas las actividades dadas de alta en el sist
 	private Vector<Actividad> actividadesBD(){
 		 Vector<Actividad> actividades = new Vector<Actividad>();
@@ -328,7 +349,7 @@ public class ControladorDeportes extends Observable{
 	}
 	
 	
-	//TODO ver cronograma
+	
 	public void generarCronograma(){
 		for (ClaseAct clase : clases) {
 			switch (clase.getDia()) {
@@ -360,5 +381,64 @@ public class ControladorDeportes extends Observable{
 				break;
 			}
 		}
+	}
+	
+	public List<String> MostrarCronograma(){
+		List<String> vistasCrono = new ArrayList<String>();
+		Vector<ClaseAct> dia = cronograma.getLunes();
+		for(int i=0;i<dia.size();i++){
+			String a = String.valueOf(dia.get(i).getHoraDesde());
+			String b = String.valueOf(dia.get(i).getHoraHasta());
+			String c = String.valueOf(dia.get(i).getIdAct());
+			String d = String.valueOf(dia.get(i).getIdClase());
+			String info = ("Lunes  Desde: " + a + "Hasta : " + b + "Nro Act : " + c + "Nro Clase: " + d);
+			vistasCrono.add(info);
+		}
+		dia = cronograma.getMartes();
+		for(int i=0;i<dia.size();i++){
+			String a = String.valueOf(dia.get(i).getHoraDesde());
+			String b = String.valueOf(dia.get(i).getHoraHasta());
+			String c = String.valueOf(dia.get(i).getIdAct());
+			String d = String.valueOf(dia.get(i).getIdClase());
+			String info = ("Martes  Desde: " + a + "Hasta : " + b + "Nro Act : " + c + "Nro Clase: " + d);
+			vistasCrono.add(info);
+		}
+		dia = cronograma.getMiercoles();
+		for(int i=0;i<dia.size();i++){
+			String a = String.valueOf(dia.get(i).getHoraDesde());
+			String b = String.valueOf(dia.get(i).getHoraHasta());
+			String c = String.valueOf(dia.get(i).getIdAct());
+			String d = String.valueOf(dia.get(i).getIdClase());
+			String info = ("Miercoles  Desde: " + a + "Hasta : " + b + "Nro Act : " + c + "Nro Clase: " + d);
+			vistasCrono.add(info);
+		}
+		dia = cronograma.getJueves();
+		for(int i=0;i<dia.size();i++){
+			String a = String.valueOf(dia.get(i).getHoraDesde());
+			String b = String.valueOf(dia.get(i).getHoraHasta());
+			String c = String.valueOf(dia.get(i).getIdAct());
+			String d = String.valueOf(dia.get(i).getIdClase());
+			String info = ("Jueves  Desde: " + a + "Hasta : " + b + "Nro Act : " + c + "Nro Clase: " + d);
+			vistasCrono.add(info);
+		}
+		dia = cronograma.getViernes();
+		for(int i=0;i<dia.size();i++){
+			String a = String.valueOf(dia.get(i).getHoraDesde());
+			String b = String.valueOf(dia.get(i).getHoraHasta());
+			String c = String.valueOf(dia.get(i).getIdAct());
+			String d = String.valueOf(dia.get(i).getIdClase());
+			String info = ("Viernes  Desde: " + a + "Hasta : " + b + "Nro Act : " + c + "Nro Clase: " + d);
+			vistasCrono.add(info);
+		}
+		dia = cronograma.getSabado();
+		for(int i=0;i<dia.size();i++){
+			String a = String.valueOf(dia.get(i).getHoraDesde());
+			String b = String.valueOf(dia.get(i).getHoraHasta());
+			String c = String.valueOf(dia.get(i).getIdAct());
+			String d = String.valueOf(dia.get(i).getIdClase());
+			String info = ("Sabado  Desde: " + a + "Hasta : " + b + "Nro Act : " + c + "Nro Clase: " + d);
+			vistasCrono.add(info);
+		}
+		return vistasCrono;
 	}
 }

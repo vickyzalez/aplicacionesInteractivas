@@ -2,12 +2,20 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JButton;
+
 import javax.swing.JDesktopPane;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
+
+import controladores.ControladorAdministrativo;
 
 
 /**
@@ -22,35 +30,26 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class FrameAdministracion extends javax.swing.JFrame implements ActionListener{
+public class VerRecibo extends javax.swing.JFrame implements ActionListener{
 	private JDesktopPane contenedor;
+	private JLabel descripcion;
 	private JButton salir;
-	private JButton abonos;
-	private JButton personal;
-	private JButton convenios;
-	private JLabel Administracion;
-    private static FrameAdministracion inst=null;
+	private JEditorPane loadRecibos;
+
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				FrameAdministracion inst = new FrameAdministracion();
+				VerRecibo inst = new VerRecibo();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	
-	public static FrameAdministracion getAdministracion(){
-		if(inst == null){
-			inst = new FrameAdministracion();
-		}
-		return inst;
-	}
-	private FrameAdministracion() {
+	public VerRecibo() {
 		super();
 		initGUI();
 	}
@@ -62,43 +61,31 @@ public class FrameAdministracion extends javax.swing.JFrame implements ActionLis
 				contenedor = new JDesktopPane();
 				getContentPane().add(contenedor, BorderLayout.CENTER);
 				{
-					Administracion = new JLabel();
-					contenedor.add(Administracion);
-					Administracion.setText("Administracion");
-					Administracion.setBounds(151, 25, 139, 16);
-				
+					descripcion = new JLabel();
+					contenedor.add(descripcion);
+					descripcion.setText("Se generaron los siguientes recibos: ");
+					descripcion.setBounds(45, 33, 244, 39);
 				}
 				{
-					convenios = new JButton();
-					contenedor.add(convenios);
-					convenios.setText("Gestion Empresas Convenios");
-					convenios.setBounds(91, 91, 217, 34);
-					convenios.addActionListener(this);
-				}
-				{
-					personal = new JButton();
-					contenedor.add(personal);
-					personal.setText("Gestion Empleados");
-					personal.setBounds(91, 136, 217, 34);
-					personal.addActionListener(this);
-				}
-				{
-					abonos = new JButton();
-					contenedor.add(abonos);
-					abonos.setText("Gestion Abonos");
-					abonos.setBounds(91, 181, 217, 29);
-					abonos.addActionListener(this);
+					loadRecibos = new JEditorPane();
+					contenedor.add(loadRecibos);
+				//	ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
+				//	List<String>  reciboss = adm.idRecibos();
+				//	for(Iterator<String> i= reciboss.iterator();i.hasNext();){
+				//		loadRecibos.setText(i.next());
+				//	}
+					loadRecibos.setBounds(45, 84, 318, 166);
 				}
 				{
 					salir = new JButton();
 					contenedor.add(salir);
-					salir.setText("SALIR ");
-					salir.setBounds(151, 269, 93, 22);
+					salir.setText("Salir");
+					salir.setBounds(452, 220, 79, 23);
 					salir.addActionListener(this);
 				}
 			}
 			pack();
-			this.setSize(413, 341);
+			this.setSize(610, 300);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,23 +93,7 @@ public class FrameAdministracion extends javax.swing.JFrame implements ActionLis
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==convenios){
-			FrameConvenios f = FrameConvenios.getFrameConvenios();
-			f.setVisible(true);
-			this.setVisible(false);
-		}
-		if(e.getSource()==this.personal){
-			FramePersonal fp = new FramePersonal();
-			fp.setVisible(true);
-			this.setVisible(false);
-			
-		}
-		if(e.getSource()==this.abonos){
-			FrameAbono ab = new FrameAbono();
-			ab.setVisible(true);
-			this.setVisible(false);
-		}
-		if(e.getSource()==salir){
+		if(e.getSource() == salir){
 			Menu m = Menu.getMenu();
 			m.setVisible(true);
 			this.setVisible(false);

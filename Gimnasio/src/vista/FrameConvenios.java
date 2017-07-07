@@ -2,6 +2,8 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -12,6 +14,8 @@ import javax.swing.JLabel;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
+
+import controladores.ControladorAdministrativo;
 
 
 /**
@@ -80,12 +84,15 @@ public class FrameConvenios extends javax.swing.JFrame implements ActionListener
 					nombre.setBounds(53, 88, 113, 19);
 				}
 				{
-					ComboBoxModel empresasModel = 
-							new DefaultComboBoxModel(
-									new String[] { "Item One", "Item Two" });
 					empresas = new JComboBox();
+					
+				//	ControladorAdministrativo a = ControladorAdministrativo.getInstancia();
+				//	List<String> codigo = a.viewEmpresas();
+				//	for(Iterator<String> i=codigo.iterator();i.hasNext();){
+				//		empresas.addItem(i.next());
+				//	}
 					contenedor.add(empresas);
-					empresas.setModel(empresasModel);
+					
 					empresas.setBounds(129, 88, 122, 23);
 				}
 				{
@@ -120,7 +127,8 @@ public class FrameConvenios extends javax.swing.JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == eliminar){
-			
+			ControladorAdministrativo a = ControladorAdministrativo.getInstancia();
+			a.bajaEmpresa(Integer.parseInt(String.valueOf(this.empresas.getSelectedItem())));
 		}
 		if(e.getSource()==NUEVO){
 			FrameNuevoConvenio f = new FrameNuevoConvenio();

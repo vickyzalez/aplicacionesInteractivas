@@ -1,6 +1,5 @@
 package vista;
 import java.awt.BorderLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
@@ -16,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
-import controladores.ControladorAdministrativo;
+import controladores.ControladorDeportes;
 
 
 /**
@@ -31,13 +30,12 @@ import controladores.ControladorAdministrativo;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class FrameAbono extends javax.swing.JFrame implements ActionListener {
+public class BajaClase extends javax.swing.JFrame implements ActionListener{
 	private JDesktopPane contenedor;
 	private JButton salir;
-	private JButton NUEVO;
-	private JButton eliminar;
-	private JComboBox abonos;
-	private JLabel nombre;
+	private JButton quitar;
+	private JComboBox clasess;
+	private JLabel IDCLASE;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -45,70 +43,59 @@ public class FrameAbono extends javax.swing.JFrame implements ActionListener {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				FrameAbono inst = new FrameAbono();
+				BajaClase inst = new BajaClase();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public FrameAbono() {
+	public BajaClase() {
 		super();
 		initGUI();
 	}
 	
 	private void initGUI() {
 		try {
-			this.setTitle("Gestion Abonos");
+			this.setTitle("Quitar Clase");
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
 				contenedor = new JDesktopPane();
 				getContentPane().add(contenedor, BorderLayout.CENTER);
 				{
-					nombre = new JLabel();
-					contenedor.add(nombre);
-					nombre.setBounds(33, 38, 98, 16);
-					nombre.setText("ABONOS: ");
+					IDCLASE = new JLabel();
+					contenedor.add(IDCLASE);
+					IDCLASE.setText("ID Clase: ");
+					IDCLASE.setBounds(49, 61, 70, 16);
 				}
 				{
+					clasess = new JComboBox();
+				//	ControladorDeportes dep = ControladorDeportes.getInstancia();
+				//	List<String> idclas = dep.IdClases();
+				//	for(Iterator<String> i=idclas.iterator();i.hasNext();){
+				//		clasess.addItem(i.next());
+				//	}
 					
-					abonos = new JComboBox();
-					
-			//		ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
-		//			List<String> IdABONOS = adm.abonosview();
-		//			
-		//			for(Iterator<String> i = IdABONOS.iterator();i.hasNext();){
-		//				abonos.addItem(i.next());
-		//			}
-					
-					contenedor.add(abonos);
-					
-					abonos.setBounds(103, 35, 132, 23);
+					contenedor.add(clasess);
+					clasess.setBounds(150, 54, 100, 23);
 				}
 				{
-					eliminar = new JButton();
-					contenedor.add(eliminar);
-					eliminar.setText("ELIMINAR ");
-					eliminar.setBounds(287, 35, 122, 23);
-					eliminar.addActionListener(this);
-				}
-				{
-					NUEVO = new JButton();
-					contenedor.add(NUEVO);
-					NUEVO.setText("NUEVO ABONO");
-					NUEVO.setBounds(287, 88, 122, 23);
-					NUEVO.addActionListener(this);
+					quitar = new JButton();
+					contenedor.add(quitar);
+					quitar.setText("Borrar Clase");
+					quitar.setBounds(150, 122, 116, 23);
+					quitar.addActionListener(this);
 				}
 				{
 					salir = new JButton();
 					contenedor.add(salir);
-					salir.setText("SALIR");
-					salir.setBounds(324, 183, 81, 23);
+					salir.setText("Salir");
+					salir.setBounds(300, 122, 95, 23);
 					salir.addActionListener(this);
 				}
 			}
 			pack();
-			this.setSize(555, 274);
+			this.setSize(466, 211);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,22 +103,13 @@ public class FrameAbono extends javax.swing.JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==salir){
-			FrameAdministracion a = FrameAdministracion.getAdministracion();
-			a.setVisible(true);
+		if(e.getSource() == this.quitar){
+			ControladorDeportes dep = ControladorDeportes.getInstancia();
+			dep.bajaClase(Integer.parseInt(String.valueOf(this.clasess.getSelectedItem())));
+		}
+		if(e.getSource() == salir){
 			this.setVisible(false);
 		}
-		if(e.getSource()== eliminar){
-			ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
-			adm.bajaAbono(Integer.parseInt(String.valueOf(this.abonos.getSelectedItem())));
-			
-			
-		}
-		if(e.getSource()==NUEVO){
-			NuevoABONO a = new NuevoABONO();
-			a.setVisible(true);
-		}
-		
 	}
 
 }

@@ -2,6 +2,9 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
@@ -15,6 +18,9 @@ import javax.swing.JTextField;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
+
+import controladores.ControladorAdministrativo;
+import controladores.ControladorSocios;
 
 
 /**
@@ -32,6 +38,7 @@ import javax.swing.SwingUtilities;
 public class FrameInscripciones extends javax.swing.JFrame implements ActionListener {
 	private JDesktopPane contenedor;
 	private JRadioButton normal;
+	private JButton salir;
 	private JTextField TEXTDNI;
 	private JButton guardar;
 	private JComboBox abonos;
@@ -109,12 +116,15 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 					getGRUPO().add(corporativa);
 				}
 				{
-					ComboBoxModel conveniosModel = 
-							new DefaultComboBoxModel(
-									new String[] { "Item One", "Item Two" });
+					
 					convenios = new JComboBox();
+			//		ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
+			//			List<String> empresasView = ad.viewEmpresas();
+			//				for(Iterator<String> i = empresasView.iterator();i.hasNext();){
+			//					convenios.addItem(i.next());
+			//				}
 					contenedor.add(convenios);
-					convenios.setModel(conveniosModel);
+				
 					convenios.setBounds(45, 226, 114, 23);
 					convenios.setVisible(false);
 				}
@@ -125,12 +135,15 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 					abono.setBounds(214, 119, 79, 16);
 				}
 				{
-					ComboBoxModel abonosModel = 
-							new DefaultComboBoxModel(
-									new String[] { "Item One", "Item Two" });
+					
 					abonos = new JComboBox();
+			
+			//		ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
+			//		List<String> idAbonos = ad.abonosview();
+			//		for(Iterator<String> i = idAbonos.iterator();i.hasNext();){
+			//			abonos.addItem(i.next());
+			//		}
 					contenedor.add(abonos);
-					abonos.setModel(abonosModel);
 					abonos.setBounds(305, 116, 150, 23);
 				}
 				{
@@ -143,6 +156,7 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 				{
 					TEXTDNI = new JTextField();
 					contenedor.add(TEXTDNI);
+					contenedor.add(getSalir());
 					TEXTDNI.setBounds(107, 64, 137, 23);
 				}
 			}
@@ -170,11 +184,30 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 		if (e.getSource() == corporativa){
 			this.convenios.setVisible(true);
 		}
-		if(e.getSource()==guardar){
+		if((e.getSource()==guardar)&&(this.normal.isSelected())){
+			ControladorSocios s = ControladorSocios.getInstancia();
+			s.generarInscripcionNormal(Integer.parseInt(this.TEXTDNI.getText()),Integer.parseInt(String.valueOf(this.abonos.getSelectedItem())));
+			
+		}
+		if((e.getSource() == guardar)&&(this.corporativa.isSelected())){
+			ControladorSocios s = ControladorSocios.getInstancia();
+		//	s.generarInscripcionCorporativa(Integer.parseInt(this.TEXTDNI.getText()), Integer.parseInt(String.valueOf(this.abonos.getSelectedItem())), Integer.parseInt(String.valueOf(this.convenios.getSelectedItem())),))
+		}
+		if(e.getSource() == this.salir){
 			FrameSocio s = FrameSocio.getFrameSocio();
 			s.setVisible(true);
 			this.setVisible(false);
 		}
+	}
+	
+	private JButton getSalir() {
+		if(salir == null) {
+			salir = new JButton();
+			salir.setText("Salir");
+			salir.setBounds(561, 248, 78, 24);
+			salir.addActionListener(this);
+		}
+		return salir;
 	}
 
 }

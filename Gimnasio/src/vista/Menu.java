@@ -6,9 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
+
+import controladores.ControladorAdministrativo;
+import controladores.ControladorDeportes;
 
 
 /**
@@ -26,6 +30,7 @@ import javax.swing.SwingUtilities;
 public class Menu extends javax.swing.JFrame implements ActionListener{
 	private JDesktopPane contenedor;
 	private JButton administrativo;
+	private JButton consultar;
 	private JButton salir;
 	private JButton liquidacion;
 	private JButton GENERAR;
@@ -68,27 +73,27 @@ public class Menu extends javax.swing.JFrame implements ActionListener{
 					sistema = new JLabel();
 					contenedor.add(sistema);
 					sistema.setText("GIMNASIO");
-					sistema.setBounds(229, 21, 148, 16);
+					sistema.setBounds(126, 12, 150, 31);
 				}
 				{
 					administrativo = new JButton();
 					contenedor.add(administrativo);
 					administrativo.setText("ADMINISTRATIVO");
-					administrativo.setBounds(74, 73, 147, 23);
+					administrativo.setBounds(74, 55, 155, 28);
 					administrativo.addActionListener(this);
 				}
 				{
 					gestionarDeporte = new JButton();
 					contenedor.add(gestionarDeporte);
 					gestionarDeporte.setText("GESTION DEPORTE");
-					gestionarDeporte.setBounds(74, 119, 147, 23);
+					gestionarDeporte.setBounds(74, 94, 155, 27);
 					gestionarDeporte.addActionListener(this);
 				}
 				{
 					gestionsocios = new JButton();
 					contenedor.add(gestionsocios);
 					gestionsocios.setText("GESTION SOCIOS");
-					gestionsocios.setBounds(74, 161, 147, 23);
+					gestionsocios.setBounds(74, 132, 155, 27);
 					gestionsocios.addActionListener(this);
 				
 				}
@@ -96,26 +101,27 @@ public class Menu extends javax.swing.JFrame implements ActionListener{
 					GENERAR = new JButton();
 					contenedor.add(GENERAR);
 					GENERAR.setText("CRONOGRAMA");
-					GENERAR.setBounds(309, 73, 143, 23);
+					GENERAR.setBounds(74, 170, 155, 26);
 					GENERAR.addActionListener(this);
 				}
 				{
 					liquidacion = new JButton();
 					contenedor.add(liquidacion);
 					liquidacion.setText("LIQUIDACION");
-					liquidacion.setBounds(309, 131, 143, 23);
+					liquidacion.setBounds(74, 207, 155, 24);
 					liquidacion.addActionListener(this);
 				}
 				{
 					salir = new JButton();
 					contenedor.add(salir);
+					contenedor.add(getConsultar());
 					salir.setText("SALIR");
-					salir.setBounds(367, 228, 81, 22);
+					salir.setBounds(102, 270, 83, 30);
 					salir.addActionListener(this);
 				}
 			}
 			pack();
-			this.setSize(533, 300);
+			this.setSize(477, 362);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,9 +135,10 @@ public class Menu extends javax.swing.JFrame implements ActionListener{
 			this.setVisible(false);
 		}
 		if(e.getSource() == gestionarDeporte){
-			VentanaDeporte a = VentanaDeporte.getVentanaDeporte();
-			a.setVisible(true);
+			GestionDeporte dep = GestionDeporte.getDeporte();
+			dep.setVisible(true);
 			this.setVisible(false);
+			
 		}
 		if(e.getSource()==gestionsocios){
 			FrameSocio s = FrameSocio.getFrameSocio();
@@ -139,14 +146,36 @@ public class Menu extends javax.swing.JFrame implements ActionListener{
 			this.setVisible(false);
 		}
 		if(e.getSource()==GENERAR){
+			ControladorDeportes dep = ControladorDeportes.getInstancia();
+			dep.generarCronograma();
+			JOptionPane.showMessageDialog(null, "Se genero el cronograma");
 			
 		}
 		if(e.getSource()==liquidacion){
-			
+			ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
+			ad.liquidarSueldos();
+			VerRecibo recibo = new VerRecibo();
+			recibo.setVisible(true);
+			this.setVisible(false);
 		}
 		if(e.getSource()==salir){
 			this.setVisible(false);
 		}
+		if(e.getSource() == consultar){
+			Cronograma c = new Cronograma();
+			c.setVisible(true);
+			this.setVisible(false);
+		}
+	}
+	
+	private JButton getConsultar() {
+		if(consultar == null) {
+			consultar = new JButton();
+			consultar.setText("Consultar Cronograma");
+			consultar.setBounds(267, 113, 166, 38);
+			consultar.addActionListener(this);
+		}
+		return consultar;
 	}
 
 }

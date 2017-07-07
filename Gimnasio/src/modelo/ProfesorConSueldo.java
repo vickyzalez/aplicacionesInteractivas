@@ -31,7 +31,7 @@ public class ProfesorConSueldo extends Profesor{
 	@Override
 	public Float calcularSueldo(){
 			
-			Float aPagar = (this.sueldo - this.retencion) * (this.impuesto/100);
+			Float aPagar = (this.sueldo - this.retencion) * (1-(this.impuesto/100));
 			
 			return aPagar;
 		}

@@ -1,34 +1,25 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controladores.ControladorDeportes;
-import modelo.Abono;
-import modelo.Actividad;
-import modelo.Clase;
-import modelo.ClaseAct;
-import modelo.Deporte;
-
-import java.awt.FlowLayout;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Vector;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.JRadioButton;
+import javax.swing.border.EmptyBorder;
+
+import controladores.ControladorDeportes;
+import modelo.Actividad;
+import modelo.ClaseAct;
+import modelo.Deporte;
 
 public class VentanaDeporte extends JFrame {
 	static VentanaDeporte inst;

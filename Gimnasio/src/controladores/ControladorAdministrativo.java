@@ -1,6 +1,9 @@
 package controladores;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import modelo.Abono;
@@ -300,7 +303,8 @@ public class ControladorAdministrativo {
 		public Vector<Recibo> verRecibos(){
 			return this.recibos;
 		}
-	
+		
+
 		//servira para mostrar el combo de dias por pantalla
 		public Vector<String> comboDias(){
 			Vector<String> dias = new Vector<String>();
@@ -309,4 +313,48 @@ public class ControladorAdministrativo {
 			}
 			return dias;
 		}
+	
+		public List<String> getIdProfesores(){
+			   List<String> idProfesor = new ArrayList<String>();
+		       for(int i=0; i< this.profesores.size();i++){
+		    	   int idProfe = this.profesores.get(i).getDni();
+		    	   String dniProfe = String.valueOf(idProfe);
+		    	   idProfesor.add(dniProfe);
+		       }
+		       return idProfesor;
+		}
+		
+		public List<String> idRecibos(){
+			List<String> reciboss = new ArrayList<String>();
+			for(Iterator<Recibo> i =recibos.iterator();i.hasNext(); ){
+				Recibo re = i.next();
+				String id = String.valueOf(re.getDni());
+				String sueldo = String.valueOf(re.getSueldo());
+				String idSueldo = (id + "  " + sueldo);
+				reciboss.add(idSueldo);
+				
+			}
+			return reciboss;
+		}
+		
+		public List<String> abonosview(){
+			List<String> vistasAbonos = new ArrayList<String>();
+			for (int i=0;i < this.abonos.size();i++){
+				int id = this.abonos.get(i).getCodigo();
+				String idabono = String.valueOf(id);
+				vistasAbonos.add(idabono);
+			}
+			return vistasAbonos;
+		}
+		
+		public List<String> viewEmpresas(){
+			List<String> vistasEmpresas = new ArrayList<String>();
+			for (int i=0;i < this.empresas.size();i++){
+				int id = this.empresas.get(i).getCodigo();
+				String idcod = String.valueOf(id);
+				vistasEmpresas.add(idcod);
+			}
+			return vistasEmpresas;
+		}
+		
 }

@@ -34,7 +34,7 @@ public class ProfesorPorClase extends Profesor {
 		for (ClaseAct claseAct : clases) {
 			montoHoras = montoHoras + ((claseAct.getHoraHasta() - claseAct.getHoraDesde()) * (this.valorPorHora));
 		}
-		Float aPagar = (montoHoras - this.retencion) * (this.impuesto/100);
+		Float aPagar = (montoHoras - this.retencion) * (1- (this.impuesto/100));
 		return aPagar;
 	}
 

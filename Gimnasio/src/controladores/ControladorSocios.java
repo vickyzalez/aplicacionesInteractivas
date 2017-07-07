@@ -158,8 +158,8 @@ public class ControladorSocios implements Observer{
 	}
 
 
-	//Segundo, se elige el tipo de inscripción que va a tener	
-	//NOTA: en el front tendra un checkbox que te permitirá hacer visible el campo que desplegara todas las empresas
+	//Segundo, se elige el tipo de inscripciï¿½n que va a tener	
+	//NOTA: en el front tendra un checkbox que te permitirï¿½ hacer visible el campo que desplegara todas las empresas
 	public void generarInscripcionCorporativa(Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
 		
 		Integer codigo = this.inscripciones.size() + 1 ; //da la cantidad de inscripciones para generar el codigo
