@@ -147,11 +147,11 @@ public class AptoMedico extends javax.swing.JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==guardar){
-		/*	ControladorSocios ins = null;
+			ControladorSocios ins = null;
 			ins= ControladorSocios.getInstancia();
 			int dni = Integer.parseInt(this.TEXTDNI.getText());
 			ins.presentarAptoMedico(dni,this.TEXTFECHA.getText(),this.TEXTPROFESIONAL.getText(),this.TEXTOBSERVACIONES.getText());
-			this.setVisible(false);*/
+			this.setVisible(false);
 		    FrameSocio s = FrameSocio.getFrameSocio();
 			s.setVisible(true);
 			this.setVisible(false);

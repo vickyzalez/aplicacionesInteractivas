@@ -74,12 +74,12 @@ public class FrameAbono extends javax.swing.JFrame implements ActionListener {
 					
 					abonos = new JComboBox();
 					
-			//		ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
-		//			List<String> IdABONOS = adm.abonosview();
-		//			
-		//			for(Iterator<String> i = IdABONOS.iterator();i.hasNext();){
-		//				abonos.addItem(i.next());
-		//			}
+					ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
+					List<String> IdABONOS = adm.abonosview();
+					
+					for(Iterator<String> i = IdABONOS.iterator();i.hasNext();){
+						abonos.addItem(i.next());
+					}
 					
 					contenedor.add(abonos);
 					

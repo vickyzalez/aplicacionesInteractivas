@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Date;
 import java.util.Vector;
 
 import modelo.Inscripcion;
@@ -44,7 +43,7 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 				Integer dniSocio = result.getInt(2);
 				Integer codAbono = result.getInt(3);
 				Integer codEmpresa = result.getInt(4);
-				Date fecha = result.getDate(5);
+				String fecha = result.getString(5);
 				
 				if (codEmpresa == 0){
 					insc = new InscripcionNormal(codigoIns, dniSocio, codAbono);
@@ -78,7 +77,7 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 			//TODO Ver, quizas se deberia cambiar
 			if (inscripcion instanceof InscripcionCorporativa){
 				s.setInt(4, ((InscripcionCorporativa) inscripcion).getCodEmpresa());
-				s.setDate(5, ((InscripcionCorporativa) inscripcion).getFecha());
+				s.setString(5, ((InscripcionCorporativa) inscripcion).getFecha());
 			} else {
 				s.setInt(3, 0);
 			}
@@ -178,7 +177,7 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 				Integer dniSocio = result.getInt(2);
 				Integer codAbono = result.getInt(3);
 				Integer codEmpresa = result.getInt(4);
-				Date fecha = result.getDate(5);
+				String fecha = result.getString(5);
 				
 				if (codEmpresa == 0){
 					InscripcionNormal insc = new InscripcionNormal(codigoIns, dniSocio, codAbono);

@@ -1,15 +1,14 @@
 package modelo;
 
-import java.sql.Date;
 import java.util.Vector;
 
 public class InscripcionCorporativa extends Inscripcion {
 	
 	private Integer codEmpresa;
-	private Date fecha;
+	private String fecha;
 	
 
-	public InscripcionCorporativa(Integer codigo, Integer dniSocio, Integer codAbono, Integer codEmpresa, Date fecha){
+	public InscripcionCorporativa(Integer codigo, Integer dniSocio, Integer codAbono, Integer codEmpresa, String fecha){
 		super.codigo = codigo;
 		super.dniSocio = dniSocio;
 		super.codigoAbono = codAbono;
@@ -29,12 +28,12 @@ public class InscripcionCorporativa extends Inscripcion {
 	}
 
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	} 
 	

@@ -66,12 +66,12 @@ public class Cronograma extends javax.swing.JFrame implements ActionListener{
 				}
 				{
 					contenidoCrono = new JEditorPane();
-				//	ControladorDeportes dep = ControladorDeportes.getInstancia();
-				//	List<String> info = dep.MostrarCronograma();
-				//	
-				//	for(Iterator<String> i = info.iterator();i.hasNext();){
-				//		contenidoCrono.setText(i.next());
-				//	}
+					ControladorDeportes dep = ControladorDeportes.getInstancia();
+					List<String> info = dep.MostrarCronograma();
+					
+					for(Iterator<String> i = info.iterator();i.hasNext();){
+						contenidoCrono.setText(i.next());
+					}
 					contenedor.add(contenidoCrono);
 					contenidoCrono.setBounds(54, 78, 376, 166);
 				}

@@ -100,11 +100,11 @@ public class GestionClase extends javax.swing.JFrame implements ActionListener {
 				}
 				{
 					IdClases = new JComboBox();
-				//	ControladorDeportes dep = ControladorDeportes.getInstancia();
-				//	List<String> clases = dep.IdClases();
-				//	for(Iterator<String> i= clases.iterator();i.hasNext();){
-				//		IdClases.addItem(i.next());
-				//	}
+					ControladorDeportes dep = ControladorDeportes.getInstancia();
+					List<String> clases = dep.IdClases();
+					for(Iterator<String> i= clases.iterator();i.hasNext();){
+						IdClases.addItem(i.next());
+					}
 					
 					contenedor.add(IdClases);
 				
@@ -142,11 +142,11 @@ public class GestionClase extends javax.swing.JFrame implements ActionListener {
 					
 					dias = new JComboBox();
 					
-				//	ControladorDeportes dep =ControladorDeportes.getInstancia();
-				//	List<String> Iddias = dep.idDias();
-				//	for(Iterator<String> i= Iddias.iterator();i.hasNext();){
-				//		dias.addItem(i.next());
-				//	}
+					ControladorDeportes dep =ControladorDeportes.getInstancia();
+					List<String> Iddias = dep.idDias();
+					for(Iterator<String> i= Iddias.iterator();i.hasNext();){
+						dias.addItem(i.next());
+					}
 					contenedor.add(dias);
 					dias.setBounds(376, 46, 88, 27);
 				}

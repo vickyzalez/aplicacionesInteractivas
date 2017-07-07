@@ -118,11 +118,11 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 				{
 					
 					convenios = new JComboBox();
-			//		ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
-			//			List<String> empresasView = ad.viewEmpresas();
-			//				for(Iterator<String> i = empresasView.iterator();i.hasNext();){
-			//					convenios.addItem(i.next());
-			//				}
+					ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
+						List<String> empresasView = ad.viewEmpresas();
+							for(Iterator<String> i = empresasView.iterator();i.hasNext();){
+								convenios.addItem(i.next());
+							}
 					contenedor.add(convenios);
 				
 					convenios.setBounds(45, 226, 114, 23);
@@ -138,11 +138,11 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 					
 					abonos = new JComboBox();
 			
-			//		ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
-			//		List<String> idAbonos = ad.abonosview();
-			//		for(Iterator<String> i = idAbonos.iterator();i.hasNext();){
-			//			abonos.addItem(i.next());
-			//		}
+					ControladorAdministrativo ad = ControladorAdministrativo.getInstancia();
+					List<String> idAbonos = ad.abonosview();
+					for(Iterator<String> i = idAbonos.iterator();i.hasNext();){
+						abonos.addItem(i.next());
+					}
 					contenedor.add(abonos);
 					abonos.setBounds(305, 116, 150, 23);
 				}
@@ -191,7 +191,9 @@ public class FrameInscripciones extends javax.swing.JFrame implements ActionList
 		}
 		if((e.getSource() == guardar)&&(this.corporativa.isSelected())){
 			ControladorSocios s = ControladorSocios.getInstancia();
-		//	s.generarInscripcionCorporativa(Integer.parseInt(this.TEXTDNI.getText()), Integer.parseInt(String.valueOf(this.abonos.getSelectedItem())), Integer.parseInt(String.valueOf(this.convenios.getSelectedItem())),))
+			s.generarInscripcionCorporativa(Integer.parseInt(this.TEXTDNI.getText()), 
+					Integer.parseInt(String.valueOf(this.abonos.getSelectedItem())), 
+					Integer.parseInt(String.valueOf(this.convenios.getSelectedItem())),"");
 		}
 		if(e.getSource() == this.salir){
 			FrameSocio s = FrameSocio.getFrameSocio();

@@ -78,12 +78,12 @@ public class ModificacionClase extends javax.swing.JFrame implements ActionListe
 				}
 				{
 					clases = new JComboBox();
-				//	ControladorDeportes dep = ControladorDeportes.getInstancia();
-				//	List<String> idclasess = dep.IdClases();
+					ControladorDeportes dep = ControladorDeportes.getInstancia();
+					List<String> idclasess = dep.IdClases();
 					
-				//	for(Iterator<String> i=idclasess.iterator();i.hasNext();){
-				//		clases.addItem(i.next());
-				//	}
+					for(Iterator<String> i=idclasess.iterator();i.hasNext();){
+						clases.addItem(i.next());
+					}
 					
 					
 					contenedor.add(clases);
@@ -126,11 +126,11 @@ public class ModificacionClase extends javax.swing.JFrame implements ActionListe
 				}
 				{
 					diass = new JComboBox();
-				//	ControladorDeportes dep = ControladorDeportes.getInstancia();
-				//	List<String> iddiass = dep.idDias();
-				//	for(Iterator<String> i=iddiass.iterator();i.hasNext();){
-				//		diass.addItem(i.next());
-				//	}
+					ControladorDeportes dep = ControladorDeportes.getInstancia();
+					List<String> iddiass = dep.idDias();
+					for(Iterator<String> i=iddiass.iterator();i.hasNext();){
+						diass.addItem(i.next());
+					}
 					
 					contenedor.add(diass);
 				

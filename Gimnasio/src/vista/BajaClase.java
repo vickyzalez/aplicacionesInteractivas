@@ -70,11 +70,11 @@ public class BajaClase extends javax.swing.JFrame implements ActionListener{
 				}
 				{
 					clasess = new JComboBox();
-				//	ControladorDeportes dep = ControladorDeportes.getInstancia();
-				//	List<String> idclas = dep.IdClases();
-				//	for(Iterator<String> i=idclas.iterator();i.hasNext();){
-				//		clasess.addItem(i.next());
-				//	}
+					ControladorDeportes dep = ControladorDeportes.getInstancia();
+					List<String> idclas = dep.IdClases();
+					for(Iterator<String> i=idclas.iterator();i.hasNext();){
+						clasess.addItem(i.next());
+					}
 					
 					contenedor.add(clasess);
 					clasess.setBounds(150, 54, 100, 23);

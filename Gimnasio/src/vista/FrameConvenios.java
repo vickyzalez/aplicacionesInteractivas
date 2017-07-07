@@ -86,11 +86,11 @@ public class FrameConvenios extends javax.swing.JFrame implements ActionListener
 				{
 					empresas = new JComboBox();
 					
-				//	ControladorAdministrativo a = ControladorAdministrativo.getInstancia();
-				//	List<String> codigo = a.viewEmpresas();
-				//	for(Iterator<String> i=codigo.iterator();i.hasNext();){
-				//		empresas.addItem(i.next());
-				//	}
+					ControladorAdministrativo a = ControladorAdministrativo.getInstancia();
+					List<String> codigo = a.viewEmpresas();
+					for(Iterator<String> i=codigo.iterator();i.hasNext();){
+						empresas.addItem(i.next());
+					}
 					contenedor.add(empresas);
 					
 					empresas.setBounds(129, 88, 122, 23);

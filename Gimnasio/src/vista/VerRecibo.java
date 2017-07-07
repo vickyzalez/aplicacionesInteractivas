@@ -69,11 +69,11 @@ public class VerRecibo extends javax.swing.JFrame implements ActionListener{
 				{
 					loadRecibos = new JEditorPane();
 					contenedor.add(loadRecibos);
-				//	ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
-				//	List<String>  reciboss = adm.idRecibos();
-				//	for(Iterator<String> i= reciboss.iterator();i.hasNext();){
-				//		loadRecibos.setText(i.next());
-				//	}
+					ControladorAdministrativo adm = ControladorAdministrativo.getInstancia();
+					List<String>  reciboss = adm.idRecibos();
+					for(Iterator<String> i= reciboss.iterator();i.hasNext();){
+						loadRecibos.setText(i.next());
+					}
 					loadRecibos.setBounds(45, 84, 318, 166);
 				}
 				{
