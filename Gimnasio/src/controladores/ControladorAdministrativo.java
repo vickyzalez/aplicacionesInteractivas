@@ -188,7 +188,7 @@ public class ControladorAdministrativo {
 	}
 	
 	//Abono
-	public void altaAbono(String nombre, Float precio, Date vigencia){
+	public void altaAbono(String nombre, Float precio, String vigencia){
 		Integer codigo = this.abonos.size() + 1;
 		Abono abono = new Abono(codigo, nombre, precio, vigencia);
 		AdminPersistAbono.getInstancia().insert(abono);

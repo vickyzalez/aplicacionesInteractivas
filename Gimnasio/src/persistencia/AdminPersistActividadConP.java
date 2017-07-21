@@ -105,11 +105,11 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadConProfesor act = (ActividadConProfesor)o;
-			PreparedStatement s = con.prepareStatement("update Actividades " +
-					"set idDep = ?," +
-					"set descripcion = ?," +
-					"set profesorCodigo =?," +
-					"where codigo =?");
+			PreparedStatement s = con.prepareStatement("update TPAI.dbo.Actividades " +
+					"set idDep = ?, " +
+					"descripcion = ?, " +
+					"profesorCodigo = ? " +
+					"where codigo = ? ");
 			s.setInt(1, act.getIdDeporte());
 			s.setString(2, act.getDescripcion());
 			s.setInt(3,act.getProfesor());
@@ -189,7 +189,7 @@ public class AdminPersistActividadConP extends AdministradorPersistencia{
 			Vector <ActividadConProfesor>rta = new Vector<ActividadConProfesor>();
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Statement s = con.createStatement();
-			String senten = "Select * from TPAI.dbo.Actividades where profesorCodigo != 0";
+			String senten = "Select * from TPAI.dbo.Actividades where profesorCodigo <> 0";
 			ResultSet result = s.executeQuery(senten);
 			while (result.next())
 			{

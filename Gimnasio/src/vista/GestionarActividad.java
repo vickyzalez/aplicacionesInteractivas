@@ -137,10 +137,10 @@ public class GestionarActividad extends javax.swing.JFrame implements ActionList
 				}
 				{
 					seleccionProfesor = new JComboBox();
-			//		List<String> profesores = ControladorAdministrativo.getInstancia().getIdProfesores();
-			//		for(Iterator<String> i= profesores.iterator();i.hasNext();){
-			//			seleccionProfesor.addItem(i.next());
-			//		}
+					List<String> profesores = ControladorAdministrativo.getInstancia().getIdProfesores();
+					for(Iterator<String> i= profesores.iterator();i.hasNext();){
+						seleccionProfesor.addItem(i.next());
+					}
 					
 					contenedor.add(seleccionProfesor);
 					seleccionProfesor.setBounds(459, 33, 101, 23);

@@ -9,11 +9,11 @@ public class Abono {
 	private Integer codigo;
 	private String nombre;
 	private Float precio;
-	private Date vigencia; 
+	private String vigencia; 
 
 	
 		
-	public Abono(Integer codigo, String nombre, Float precio, Date vigencia) {
+	public Abono(Integer codigo, String nombre, Float precio, String vigencia) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
@@ -38,10 +38,10 @@ public class Abono {
 	public void setPrecio(Float precio) {
 		this.precio = precio;
 	}
-	public Date getVigencia() {
+	public String getVigencia() {
 		return vigencia;
 	}
-	public void setVigencia(Date vigencia) {
+	public void setVigencia(String vigencia) {
 		this.vigencia = vigencia;
 	}
 

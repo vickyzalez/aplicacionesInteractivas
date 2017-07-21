@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import modelo.Socio;
@@ -99,17 +102,17 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Socio soc = (Socio)o;
-			PreparedStatement s = con.prepareStatement("update Socios " +
-					"set nombre = ?," +
-					"set apellido = ?," +
-					"set domicilio =?," +
-					"set telefono =?," +
-					"set mail =?," +
-					"set aptoFecha =?," +
-					"set aptoPrf = ?," +
-					"set aptoObs =?," +
-					"set aptoFin =?" +
-					"where dni =?");
+			PreparedStatement s = con.prepareStatement("update TPAI.dbo.Socios " +
+					"set nombre = ?, " +
+					"apellido = ?, " +
+					"domicilio = ?, " +
+					"telefono = ?, " +
+					"mail = ?, " +
+					"fechaCertificado = ?, " +
+					"nombreProfesional = ?, " +
+					"observaciones = ?, " +
+					"fechaFin = ? " +
+					"where dni = ?");
 			s.setString(1, soc.getNombre());
 			s.setString(2,soc.getApellido());
 			s.setString(3, soc.getDomicilio());
@@ -175,6 +178,7 @@ public class AdminPersistSocio extends AdministradorPersistencia{
 				
 				Socio soc = new Socio(deenei, nombre, apellido, domicilio, telefono, mail);
 				if (!fechaCertificado.isEmpty()){
+					
 				soc.agregarAptoMedico(fechaCertificado, nombreProfesional, observaciones);
 				}
 				rta.add(soc);

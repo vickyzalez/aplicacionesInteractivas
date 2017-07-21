@@ -83,7 +83,7 @@ public class GestionDeporte extends javax.swing.JFrame implements ActionListener
 					altadeporte = new JButton();
 					contenedor.add(altadeporte);
 					altadeporte.setText("Alta Deporte");
-					altadeporte.setBounds(83, 242, 110, 24);
+					altadeporte.setBounds(83, 242, 150, 24);
 					altadeporte.addActionListener(this);
 				}
 				{

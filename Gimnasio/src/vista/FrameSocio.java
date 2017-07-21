@@ -31,7 +31,6 @@ import controladores.ControladorSocios;
 */
 public class FrameSocio extends javax.swing.JFrame implements ActionListener{
 	private JDesktopPane contenedor;
-	private JButton modificarClase;
 	private JButton salir;
 	private JLabel actividades;
 	private JButton agregarApto;
@@ -186,13 +185,6 @@ public class FrameSocio extends javax.swing.JFrame implements ActionListener{
 					agregarApto.addActionListener(this);
 				}
 				{
-					modificarClase = new JButton();
-					contenedor.add(modificarClase);
-					modificarClase.setText("Modificar Clase");
-					modificarClase.setBounds(413, 132, 123, 23);
-					modificarClase.addActionListener(this);
-				}
-				{
 					actividades = new JLabel();
 					contenedor.add(actividades);
 					contenedor.add(getSalir());
@@ -242,16 +234,16 @@ public class FrameSocio extends javax.swing.JFrame implements ActionListener{
 		    int dni = Integer.parseInt(this.TEXTDNI.getText());
 		    Socio soc = s.altaSocio(dni, this.TEXTNOMBRE.getText(), this.TEXTAPELLIDO.getText(), this.TEXTDOMICILIO.getText(), Integer.parseInt(this.texettel.getText()), this.textmail.getText());
 			
-			if(soc !=null){
-				JOptionPane.showMessageDialog(this,"El socio ingresado ya existe","Socio existente",JOptionPane.PLAIN_MESSAGE);
-			}else{
-				JOptionPane.showMessageDialog(this,"Se registro el socio ingresado","Registro Correcto",JOptionPane.PLAIN_MESSAGE);	
-			}
+//			if(soc !=null){
+//				JOptionPane.showMessageDialog(this,"El socio ingresado ya existe","Socio existente",JOptionPane.PLAIN_MESSAGE);
+//			}else{
+//				JOptionPane.showMessageDialog(this,"Se registro el socio ingresado","Registro Correcto",JOptionPane.PLAIN_MESSAGE);	
+//			}
 		}
-		if(e.getSource() == this.modificarClase){
-			
-		}
+		
 		if(e.getSource() == this.salir){
+			Menu m = Menu.getMenu();
+			m.setVisible(true);
 			this.setVisible(false);
 		}
 	}

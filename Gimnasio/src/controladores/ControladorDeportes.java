@@ -24,10 +24,11 @@ public class ControladorDeportes extends Observable{
 
 	public ControladorDeportes(){
 		deportes = AdminPersistDeporte.getInstancia().selectAll();
-		cargarActividades();
 		actividades = this.actividadesBD();
+        clases = AdminPersistClase.getInstancia().selectAll();
+        
+		cargarActividades();
 		cargarClases();
-		clases = AdminPersistClase.getInstancia().selectAll();
 		cronograma = new Cronograma();
 	}
 
@@ -277,7 +278,8 @@ public class ControladorDeportes extends Observable{
 
 
 	public void modificarActividadSinProfe(Integer id, String desc){
-		ActividadSinProfesor act = (ActividadSinProfesor) buscarActividadBuffer(id);
+//		ActividadSinProfesor act = buscarActividadBuffer(id);
+		ActividadSinProfesor act = AdminPersistActividadSinP.getInstancia().buscarActividad(id);
 		if (act == null) {
 			System.out.println("La actividad no se encuentra registrado en el sistema");
 		} else {

@@ -122,7 +122,7 @@ public class NuevoABONO extends javax.swing.JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource()==GUARDAR){
 			ControladorAdministrativo a = ControladorAdministrativo.getInstancia();
-			a.altaAbono(this.TEXTNOMBRE.getText(),Float.parseFloat(this.TEXTPRECIO.getText()),Date.valueOf(this.TEXETVIGENCIA.getText()));
+			a.altaAbono(this.TEXTNOMBRE.getText(),Float.parseFloat(this.TEXTPRECIO.getText()),this.TEXETVIGENCIA.getText());
 		}
 		if(e.getSource()==salir){
 			this.setVisible(false);

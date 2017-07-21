@@ -107,11 +107,11 @@ public class AdminPersistClase extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ClaseAct clase = (ClaseAct)o;
-			PreparedStatement s = con.prepareStatement("update Clases " +
-					"set idAct = ?," +
-					"set horaDesde = ?," +
-					"set horaHasta =?," +
-					"set idDia =?," +
+			PreparedStatement s = con.prepareStatement("update TPAI.dbo.Clases " +
+					"set idAct = ?, " +
+					"horaDesde = ?, " +
+					"horaHasta = ?, " +
+					"idDia = ? " +
 					"where idClase =?");
 			s.setInt(1, clase.getIdAct());
 			s.setInt(2, clase.getHoraDesde());

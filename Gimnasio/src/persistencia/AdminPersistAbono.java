@@ -33,7 +33,7 @@ public class AdminPersistAbono extends AdministradorPersistencia{
 		{			
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Abono abono = null;
-			PreparedStatement s = con.prepareStatement("select * from TPAI.dbo.Abono where codigo = ?");
+			PreparedStatement s = con.prepareStatement("select * from TPAI.dbo.Abonos where codigo = ?");
 			s.setInt(1,codigo);
 			ResultSet result = s.executeQuery();
 			while (result.next())
@@ -41,7 +41,7 @@ public class AdminPersistAbono extends AdministradorPersistencia{
 				Integer cod = result.getInt(1);
 				String nombre = result.getString(2);
 				Float precio = result.getFloat(3);
-				Date fecha = result.getDate(4);
+				String fecha = result.getString(4);
 				
 				abono = new Abono(cod, nombre, precio, fecha);
 			}
@@ -67,7 +67,7 @@ public class AdminPersistAbono extends AdministradorPersistencia{
 			s.setInt(1, abono.getCodigo());
 			s.setString(2, abono.getNombre());
 			s.setFloat(3, abono.getPrecio());
-			s.setDate(4, abono.getVigencia());
+			s.setString(4, abono.getVigencia());
 			s.execute();
 			con.close();
 		}
@@ -127,7 +127,7 @@ public class AdminPersistAbono extends AdministradorPersistencia{
 				Integer codigo = result.getInt(1);
 				String nombre = result.getString(2);
 				Float precio = result.getFloat(3);
-				Date fecha = result.getDate(4);
+				String fecha = result.getString(4);
 				
 				Abono abono = new Abono(codigo, nombre, precio, fecha);
 				rta.add(abono);
@@ -138,7 +138,7 @@ public class AdminPersistAbono extends AdministradorPersistencia{
 		}
 		catch(Exception e)
 		{
-			System.out.println("No se pudieron mosrrar los abonos");
+			System.out.println("No se pudieron mostrar los abonos");
 		}
 		return null;
 	}

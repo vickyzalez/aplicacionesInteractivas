@@ -35,9 +35,10 @@ public class Socio {
 		this.am.setObservaciones(observaciones);
 		Calendar fechaFin = Calendar.getInstance();
 		fechaFin.add(Calendar.MONTH, 12);
-		SimpleDateFormat formatter= new SimpleDateFormat("DD-MM-yyyy"); 
-		String currentDate = formatter.format(fechaFin);
-		this.am.setFechaFin(currentDate);
+		SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy"); 
+		//String currentDate = formatter.format(fechaFin);
+		//this.am.setFechaFin(currentDate);
+		this.am.setFechaFin(fechaCertificado);
 		
 	}
 

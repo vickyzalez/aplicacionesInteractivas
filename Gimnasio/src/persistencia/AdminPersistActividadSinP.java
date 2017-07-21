@@ -105,11 +105,11 @@ public class AdminPersistActividadSinP extends AdministradorPersistencia{
 		{
 			Connection con = ConectorPersist.getInstance().getConnection();
 			ActividadSinProfesor act = (ActividadSinProfesor)o;
-			PreparedStatement s = con.prepareStatement("update Actividades " +
-					"set idDep = ?," +
-					"set descripcion = ?," +
-					"set codigoProfesor =?," +
-					"where codigo =?");
+			PreparedStatement s = con.prepareStatement("update TPAI.dbo.Actividades " +
+					"set idDep = ?, " +
+					"descripcion = ?, " +
+					"profesorCodigo = ? " +
+					"where codigo = ?");
 			s.setInt(1, act.getIdDeporte());
 			s.setString(2, act.getDescripcion());
 			s.setInt(3,0);

@@ -79,7 +79,8 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 				s.setInt(4, ((InscripcionCorporativa) inscripcion).getCodEmpresa());
 				s.setString(5, ((InscripcionCorporativa) inscripcion).getFecha());
 			} else {
-				s.setInt(3, 0);
+				s.setInt(4, 0);
+				s.setInt(5, 0);
 			}
 			
 			s.execute();
@@ -169,7 +170,7 @@ public class AdminPersistInscrip extends AdministradorPersistencia{
 			Vector <Inscripcion>rta = new Vector<Inscripcion>();
 			Connection con = ConectorPersist.getInstance().getConnection();
 			Statement s = con.createStatement();
-			String senten = "Select * from TPAI.dbo.Inscripcion";
+			String senten = "Select * from TPAI.dbo.Inscripciones";
 			ResultSet result = s.executeQuery(senten);
 			while (result.next())
 			{

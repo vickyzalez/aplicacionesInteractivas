@@ -43,7 +43,8 @@ public class GestionClase extends javax.swing.JFrame implements ActionListener {
 	private JLabel hast;
 	private JTextField desde;
 	private JLabel horario;
-	private JComboBox IdClases;
+//	private JComboBox IdClases;
+	private JTextField IdClases;
 	private JLabel idClase;
 	private JTextField textIdActividad;
 	private JLabel idActividad;
@@ -99,14 +100,17 @@ public class GestionClase extends javax.swing.JFrame implements ActionListener {
 					idClase.setBounds(43, 120, 72, 16);
 				}
 				{
-					IdClases = new JComboBox();
-					ControladorDeportes dep = ControladorDeportes.getInstancia();
-					List<String> clases = dep.IdClases();
-					for(Iterator<String> i= clases.iterator();i.hasNext();){
-						IdClases.addItem(i.next());
-					}
-					
+					IdClases = new JTextField();
 					contenedor.add(IdClases);
+//					desde.setBounds(185, 170, 95, 23);
+					
+//					IdClases = new JComboBox();
+//					ControladorDeportes dep = ControladorDeportes.getInstancia();
+//					List<String> clases = dep.IdClases();
+//					for(Iterator<String> i= clases.iterator();i.hasNext();){
+//						IdClases.addItem(i.next());
+//					}
+//					contenedor.add(IdClases);
 				
 					IdClases.setBounds(165, 113, 93, 23);
 				}
@@ -186,7 +190,7 @@ public class GestionClase extends javax.swing.JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource() == guardar){
 			ControladorDeportes dep = ControladorDeportes.getInstancia();
-			dep.agregarClase(Integer.parseInt(this.textIdActividad.getText()),Integer.parseInt(String.valueOf(this.IdClases.getSelectedItem())), Integer.parseInt(this.desde.getText()), Integer.parseInt(this.texthast.getText()), Integer.parseInt(String.valueOf(dias.getSelectedItem())));
+			dep.agregarClase(Integer.parseInt(this.textIdActividad.getText()),Integer.parseInt(this.IdClases.getText()), Integer.parseInt(this.desde.getText()), Integer.parseInt(this.texthast.getText()), Integer.parseInt(String.valueOf(dias.getSelectedItem())));
 			
 		}
 		if(e.getSource() == salir){

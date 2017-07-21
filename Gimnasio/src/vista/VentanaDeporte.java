@@ -468,7 +468,5 @@ public class VentanaDeporte extends JFrame {
 		contentPane.add(txtProfesor);
 		txtProfesor.setColumns(10);
 
-
-
 	}
 }

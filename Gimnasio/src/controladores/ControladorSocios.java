@@ -226,7 +226,7 @@ public class ControladorSocios implements Observer{
 	
 	}	
 
-	public Date obtenerFinAbono(Socio socio) {
+	public String obtenerFinAbono(Socio socio) {
 		
 		Inscripcion ins = buscarInscripBuffer(socio.getInscripcion());
 		Abono abono = ControladorAdministrativo.getInstancia().buscarAbonoBuffer(ins.getCodigoAbono());
